@@ -1,0 +1,28 @@
+:root {
+  --color-bg: #fbfaf8;
+  --color-surface: #ffffff;
+  --color-text: #2b2620;
+  --color-text-muted: #6b6258;
+  --color-border: #e6e1d8;
+  --color-brand: #2f5d52;
+  --color-brand-dark: #1f3f37;
+  --color-accent: #b8860b;
+
+  --font-body: 'Noto Sans Hebrew', system-ui, sans-serif;
+  --font-heading: 'Frank Ruhl Libre', 'Noto Sans Hebrew', serif;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4.5rem;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+
+  --radius: 0.5rem;
+}

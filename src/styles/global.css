@@ -1,0 +1,49 @@
+@import './tokens.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  text-align: start;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  color: var(--color-brand-dark);
+  line-height: 1.3;
+}
+
+a {
+  color: var(--color-brand);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* מספרים/טלפונים/אימייל בתוך זרימת RTL חייבים תצוגה LTR נכונה */
+.ltr-inline {
+  unicode-bidi: isolate;
+  direction: ltr;
+  display: inline-block;
+}
+
+.page {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
