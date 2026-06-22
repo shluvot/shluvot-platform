@@ -1,9 +1,13 @@
 import { supabase } from './supabaseClient';
 
 export async function createRegistrant(registrant) {
-  const { data, error } = await supabase.from('registrants').insert(registrant).select().single();
+  // אנון אין לו SELECT policy בכוונה (v1: אין לנרשם גישת קריאה אפילו לרשומה של עצמו - ראו §9 בתוכנית ל-Phase 2).
+  // לכן לא ניתן לבקש .select() בחזרה על insert - זה דורש מדיניות SELECT וייכשל ב-RLS גם אם ה-INSERT עצמו מותר.
+  // פותרים ע"י יצירת ה-id בצד הלקוח ושליחתו במפורש, כך שלא צריך לקרוא את השורה בחזרה כדי לדעת אותו.
+  const id = crypto.randomUUID();
+  const { error } = await supabase.from('registrants').insert({ id, ...registrant });
   if (error) throw error;
-  return data;
+  return { id, ...registrant };
 }
 
 export async function getRegistrants({ search = '', status = null } = {}) {
