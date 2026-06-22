@@ -12,7 +12,7 @@ import { logout } from '../Auth/actions/authActions';
 
 export default function RegistrantList() {
   const dispatch = useDispatch();
-  const { rows, filters, status } = useSelector((state) => state.adminRegistrants);
+  const { rows, filters, status, error } = useSelector((state) => state.adminRegistrants);
   const [overrideTarget, setOverrideTarget] = useState(null);
 
   useEffect(() => {
@@ -43,9 +43,9 @@ export default function RegistrantList() {
 
       <RegistrantFilters filters={filters} onChange={(patch) => dispatch(changeFilters(patch))} />
 
-      {status === 'loading' ? (
-        <Spinner />
-      ) : (
+      {status === 'loading' && <Spinner />}
+      {status === 'error' && <p style={{ color: '#a13d3d' }}>שגיאה בטעינת הנרשמים: {error}</p>}
+      {status !== 'loading' && status !== 'error' && (
         <RegistrantTable
           rows={rows}
           onOverridePayment={(registrant, payment) => setOverrideTarget({ registrant, payment })}
