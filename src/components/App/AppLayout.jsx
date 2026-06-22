@@ -15,6 +15,7 @@ export default function AppLayout() {
         <Link to="/">בית</Link>
         <Link to="/about">אודות</Link>
         <Link to="/services">שירותים</Link>
+        <Link to="/updates">עדכונים</Link>
         <Link to="/contact">יצירת קשר</Link>
         <Link to="/registration">הרשמה</Link>
       </nav>

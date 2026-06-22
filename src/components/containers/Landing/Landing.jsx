@@ -1,36 +1,67 @@
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import HeroSection from '../../../business/HeroSection/HeroSection';
+import StatsStrip from '../../../business/StatsStrip/StatsStrip';
+import ValuePropsSection from '../../../business/ValuePropsSection/ValuePropsSection';
+import TestimonialList from '../../../business/TestimonialList/TestimonialList';
+import Timeline from '../../../business/Timeline/Timeline';
+import ArticleGrid from '../../../business/ArticleGrid/ArticleGrid';
 import PageHeader from '../../../dummies/PageHeader/PageHeader';
-import Button from '../../../dummies/Button/Button';
-import Card from '../../../dummies/Card/Card';
+import { sdk } from '../../../sdk';
 
-// דף נחיתה סטטי — ללא Redux. תוכן placeholder, יוחלף בהמשך בתוכן סופי מהעמותה.
 export default function Landing() {
+  const blocks = useSelector((state) => state.siteContent.blocks);
+  const [latestArticles, setLatestArticles] = useState([]);
+
+  useEffect(() => {
+    sdk.articles
+      .getPublishedArticles()
+      .then((articles) => setLatestArticles(articles.slice(0, 3)))
+      .catch(() => setLatestArticles([]));
+  }, []);
+
+  const hero = blocks.hero ?? {};
+  const stats = blocks.stats?.items ?? [];
+  const valueProps = blocks.value_props?.items ?? [];
+  const testimonials = blocks.testimonials?.items ?? [];
+  const timelineEvents = blocks.timeline?.events ?? [];
+
   return (
-    <div className="page">
-      <PageHeader
-        title="שלובות — איגוד מטפלות במשפחתונים"
-        subtitle="קול מקצועי, חם ומאוחד לכל מטפלת במשפחתון בישראל"
+    <div>
+      <HeroSection
+        title={hero.title}
+        subtitle={hero.subtitle}
+        ctaLabel={hero.ctaLabel}
+        heroImageUrl={hero.heroImageUrl}
       />
 
-      <div style={{ textAlign: 'center', marginBottom: 'var(--space-5)' }}>
-        <Link to="/registration">
-          <Button>הרשמה לחברות באיגוד</Button>
-        </Link>
-      </div>
+      <div className="page">
+        <StatsStrip items={stats} />
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))', gap: 'var(--space-3)' }}>
-        <Card>
-          <h3>ייעוץ והכוונה</h3>
-          <p>תמיכה מקצועית וזכויות עבור מטפלות במשפחתונים.</p>
-        </Card>
-        <Card>
-          <h3>קול מאוחד</h3>
-          <p>ייצוג מול הרשויות והגופים המפעילים.</p>
-        </Card>
-        <Card>
-          <h3>קהילה</h3>
-          <p>מפגשים, הכשרות ושיתוף ידע בין חברות האיגוד.</p>
-        </Card>
+        <ValuePropsSection items={valueProps} />
+
+        {testimonials.length > 0 && (
+          <section style={{ margin: 'var(--space-5) 0' }}>
+            <PageHeader title="חברות מספרות" />
+            <TestimonialList items={testimonials} />
+          </section>
+        )}
+
+        {timelineEvents.length > 0 && (
+          <section style={{ margin: 'var(--space-5) 0' }}>
+            <PageHeader title="ציר זמן" />
+            <Timeline events={timelineEvents} />
+          </section>
+        )}
+
+        <section style={{ margin: 'var(--space-5) 0' }}>
+          <PageHeader title="עדכונים אחרונים" />
+          <ArticleGrid articles={latestArticles} />
+          <div style={{ textAlign: 'center', marginTop: 'var(--space-2)' }}>
+            <Link to="/updates">לכל העדכונים ←</Link>
+          </div>
+        </section>
       </div>
     </div>
   );

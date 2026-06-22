@@ -4,12 +4,14 @@ import { RouterProvider } from 'react-router-dom';
 import { store } from '../../store/configureStore';
 import { router } from '../../routes/router';
 import { restoreSession } from '../containers/Auth/actions/authActions';
+import { loadSiteContent } from '../containers/SiteContent/actions/siteContentActions';
 
-function SessionBootstrap({ children }) {
+function AppBootstrap({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(restoreSession());
+    dispatch(loadSiteContent());
   }, [dispatch]);
 
   return children;
@@ -18,9 +20,9 @@ function SessionBootstrap({ children }) {
 export default function App() {
   return (
     <Provider store={store}>
-      <SessionBootstrap>
+      <AppBootstrap>
         <RouterProvider router={router} />
-      </SessionBootstrap>
+      </AppBootstrap>
     </Provider>
   );
 }

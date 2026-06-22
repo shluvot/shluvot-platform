@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PageHeader from '../../../dummies/PageHeader/PageHeader';
+import AdminNav from '../../../dummies/AdminNav/AdminNav';
 import Spinner from '../../../dummies/Spinner/Spinner';
 import Button from '../../../dummies/Button/Button';
 import RegistrantFilters from '../../../business/RegistrantFilters/RegistrantFilters';
@@ -32,6 +33,7 @@ export default function RegistrantList() {
   return (
     <div className="page">
       <PageHeader title="ניהול נרשמים" />
+      <AdminNav />
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
         <Button variant="secondary" onClick={handleExportCsv}>
           ייצוא ל-CSV
