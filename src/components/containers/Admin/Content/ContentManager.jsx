@@ -36,6 +36,12 @@ function HeroEditor({ initialValue, onSave }) {
   return (
     <Card>
       <h3>אזור פתיחה (Hero)</h3>
+      <TextField
+        label="שורת פתיחה קצרה (eyebrow)"
+        name="eyebrow"
+        value={draft.eyebrow ?? ''}
+        onChange={(v) => setDraft({ ...draft, eyebrow: v })}
+      />
       <TextField label="כותרת" name="title" value={draft.title ?? ''} onChange={(v) => setDraft({ ...draft, title: v })} />
       <TextField
         label="כותרת משנה"
@@ -102,6 +108,33 @@ function PageBodyEditor({ title, initialBody, onSave }) {
   );
 }
 
+function MissionStatementEditor({ initialValue, onSave }) {
+  const [draft, setDraft] = useState(initialValue);
+  const [isSaving, setIsSaving] = useState(false);
+
+  return (
+    <Card>
+      <h3>הצהרת משימה</h3>
+      <TextField
+        label="שורת פתיחה"
+        name="intro"
+        value={draft.intro ?? ''}
+        onChange={(v) => setDraft({ ...draft, intro: v })}
+      />
+      <Textarea label="גוף ההצהרה" name="body" value={draft.body ?? ''} onChange={(v) => setDraft({ ...draft, body: v })} rows={3} />
+      <Textarea label="ציטוט" name="quote" value={draft.quote ?? ''} onChange={(v) => setDraft({ ...draft, quote: v })} rows={3} />
+      <SaveButton
+        isSaving={isSaving}
+        onSave={async () => {
+          setIsSaving(true);
+          await onSave(draft);
+          setIsSaving(false);
+        }}
+      />
+    </Card>
+  );
+}
+
 export default function ContentManager() {
   const dispatch = useDispatch();
   const blocks = useSelector((state) => state.siteContent.blocks);
@@ -114,6 +147,8 @@ export default function ContentManager() {
       <AdminNav />
 
       <HeroEditor initialValue={blocks.hero ?? {}} onSave={save('hero')} />
+
+      <MissionStatementEditor initialValue={blocks.mission_statement ?? {}} onSave={save('mission_statement')} />
 
       <ListBlockEditor
         title="מספרים (Stats)"

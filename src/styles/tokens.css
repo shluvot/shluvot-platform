@@ -1,15 +1,21 @@
 :root {
-  --color-bg: #fbfaf8;
+  --color-bg: #ffffff;
   --color-surface: #ffffff;
-  --color-text: #2b2620;
-  --color-text-muted: #6b6258;
-  --color-border: #e6e1d8;
-  --color-brand: #2f5d52;
-  --color-brand-dark: #1f3f37;
-  --color-accent: #b8860b;
+  --color-text: #2b2d3a;
+  --color-text-muted: #6b7280;
+  --color-border: #e7e9f0;
 
-  --font-body: 'Noto Sans Hebrew', system-ui, sans-serif;
-  --font-heading: 'Frank Ruhl Libre', 'Noto Sans Hebrew', serif;
+  --color-blue: #4f7fc4;
+  --color-blue-dark: #355a96;
+  --color-pink: #ee7c95;
+  --color-pink-dark: #d85c79;
+
+  --color-brand: var(--color-blue);
+  --color-brand-dark: var(--color-blue-dark);
+  --color-accent: var(--color-pink);
+
+  --font-body: 'Rubik', system-ui, sans-serif;
+  --font-heading: 'Rubik', system-ui, sans-serif;
 
   --space-1: 0.5rem;
   --space-2: 1rem;
@@ -22,7 +28,8 @@
   --text-base: 1rem;
   --text-lg: 1.25rem;
   --text-xl: 1.75rem;
-  --text-2xl: 2.5rem;
+  --text-2xl: 2.75rem;
 
-  --radius: 0.5rem;
+  --radius: 0.75rem;
+  --radius-pill: 999px;
 }

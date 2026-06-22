@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import HeroSection from '../../../business/HeroSection/HeroSection';
+import MissionStatement from '../../../business/MissionStatement/MissionStatement';
 import StatsStrip from '../../../business/StatsStrip/StatsStrip';
 import ValuePropsSection from '../../../business/ValuePropsSection/ValuePropsSection';
 import TestimonialList from '../../../business/TestimonialList/TestimonialList';
@@ -22,14 +23,17 @@ export default function Landing() {
   }, []);
 
   const hero = blocks.hero ?? {};
+  const mission = blocks.mission_statement ?? {};
   const stats = blocks.stats?.items ?? [];
   const valueProps = blocks.value_props?.items ?? [];
   const testimonials = blocks.testimonials?.items ?? [];
   const timelineEvents = blocks.timeline?.events ?? [];
+  const missionQuoteItem = mission.quote ? [{ quote: mission.quote }] : [];
 
   return (
     <div>
       <HeroSection
+        eyebrow={hero.eyebrow}
         title={hero.title}
         subtitle={hero.subtitle}
         ctaLabel={hero.ctaLabel}
@@ -37,6 +41,16 @@ export default function Landing() {
       />
 
       <div className="page">
+        <section style={{ margin: 'var(--space-5) 0' }}>
+          <MissionStatement intro={mission.intro} body={mission.body} />
+        </section>
+
+        {missionQuoteItem.length > 0 && (
+          <section style={{ margin: 'var(--space-4) 0' }}>
+            <TestimonialList items={missionQuoteItem} />
+          </section>
+        )}
+
         <StatsStrip items={stats} />
 
         <ValuePropsSection items={valueProps} />
