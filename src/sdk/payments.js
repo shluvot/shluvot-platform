@@ -9,9 +9,13 @@ export async function createPaymentSession({ registrantId, billingCycle, amountI
 }
 
 export async function getPaymentByReference(reference) {
-  const { data, error } = await supabase.from('payments').select('*').eq('reference', reference).single();
+  // payments חסום ל-anon ב-RLS בכוונה; הפונקציה הזו עוברת דרך Edge Function עם service_role
+  // שמחזירה רק את ה-status, כדי שנרשם יוכל לבדוק את התשלום של עצמו בלי לחשוף את הטבלה כולה.
+  const { data, error } = await supabase.functions.invoke('get-payment-status', {
+    body: { reference },
+  });
   if (error) throw error;
-  return data;
+  return data; // { status }
 }
 
 export async function overridePaymentStatus(paymentId, { status, reason }) {

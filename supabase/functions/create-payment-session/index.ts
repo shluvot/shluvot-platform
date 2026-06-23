@@ -63,9 +63,21 @@ Deno.serve(async (req) => {
     const nedarimBaseUrl = Deno.env.get('NEDARIM_BASE_URL');
 
     if (!mosadId || !apiKey || !nedarimBaseUrl) {
-      // TEST MODE: אין קרדנציאלס אמיתיים עדיין - מחזירים transactionId מדומה כדי שהזרימה תיבדק מקצה לקצה.
+      // TEST MODE: אין קרדנציאלס אמיתיים עדיין - מדמים את ה-callback של נדרים פלוס בעצמנו
+      // (קריאה ל-nedarim-webhook עם payload מדומה) כדי שכל הזרימה תיבדק מקצה לקצה בלי curl ידני.
+      const testTransactionId = `TEST-${reference}`;
+      try {
+        await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/nedarim-webhook`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ param1: reference, status: 'success', TransactionId: testTransactionId }),
+        });
+      } catch (webhookError) {
+        console.error('TEST MODE webhook simulation failed', webhookError);
+      }
+
       return new Response(
-        JSON.stringify({ transactionId: `TEST-${reference}`, reference, testMode: true }),
+        JSON.stringify({ transactionId: testTransactionId, reference, testMode: true }),
         { headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' } },
       );
     }

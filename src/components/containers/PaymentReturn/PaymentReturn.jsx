@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import PageHeader from '../../../dummies/PageHeader/PageHeader';
 import Card from '../../../dummies/Card/Card';
+import Button from '../../../dummies/Button/Button';
 import NedarimRedirectPanel from '../../../business/NedarimRedirectPanel/NedarimRedirectPanel';
 import StatusBadge from '../../../business/StatusBadge/StatusBadge';
 import { fetchPaymentStatus } from './actions/paymentReturnActions';
 
 export default function PaymentReturn() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const reference = searchParams.get('ref');
   const [payment, setPayment] = useState(null);
   const [error, setError] = useState(null);
@@ -36,7 +38,7 @@ export default function PaymentReturn() {
         </Card>
       )}
       {!error && !payment && <NedarimRedirectPanel isLoading />}
-      {payment && (
+      {payment && payment.status === 'paid' && (
         <Card>
           <div
             style={{
@@ -54,6 +56,17 @@ export default function PaymentReturn() {
           >
             ✓
           </div>
+          <p style={{ margin: 0, fontSize: 'var(--text-lg)' }}>
+            סטטוס תשלום: <StatusBadge status={payment.status} />
+          </p>
+          <p style={{ margin: 'var(--space-2) 0 var(--space-3)', color: 'var(--color-text-muted)' }}>
+            שלחנו אישור הרשמה לכתובת המייל שלך.
+          </p>
+          <Button onClick={() => navigate('/')}>חזרה לדף הבית</Button>
+        </Card>
+      )}
+      {payment && payment.status !== 'paid' && (
+        <Card>
           <p style={{ margin: 0, fontSize: 'var(--text-lg)' }}>
             סטטוס תשלום: <StatusBadge status={payment.status} />
           </p>
