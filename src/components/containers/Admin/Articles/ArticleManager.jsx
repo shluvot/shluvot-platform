@@ -74,7 +74,7 @@ export default function ArticleManager() {
   if (editingId !== undefined) {
     return (
       <div className="page">
-        <PageHeader title={editingId ? 'עריכת עדכון' : 'עדכון חדש'} />
+        <PageHeader eyebrow="אדמין" title={editingId ? 'עריכת עדכון' : 'עדכון חדש'} />
         <ArticleEditorForm
           values={draft}
           errors={errors}
@@ -91,12 +91,12 @@ export default function ArticleManager() {
 
   return (
     <div className="page">
-      <PageHeader title="ניהול עדכונים וחדשות" />
+      <PageHeader eyebrow="אדמין" title="ניהול עדכונים וחדשות" />
       <AdminNav />
       <Button onClick={startNew}>עדכון חדש</Button>
 
       {status === 'loading' && <Spinner />}
-      {status === 'error' && <p style={{ color: '#a13d3d' }}>שגיאה: {error}</p>}
+      {status === 'error' && <p style={{ color: '#E0554F', fontWeight: 600 }}>שגיאה: {error}</p>}
       {status !== 'loading' && status !== 'error' && rows.length === 0 && <EmptyState message="אין עדכונים עדיין" />}
 
       {rows.map((article) => (

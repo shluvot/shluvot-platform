@@ -131,7 +131,7 @@ export default function ContentManager() {
 
   return (
     <div className="page">
-      <PageHeader title="ניהול תוכן האתר" />
+      <PageHeader eyebrow="אדמין" title="ניהול תוכן האתר" />
       <AdminNav />
 
       <HeroEditor initialValue={blocks.hero ?? {}} onSave={save('hero')} />

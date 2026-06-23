@@ -31,7 +31,7 @@ export default function ManualStatusOverrideModal({ isOpen, registrant, payment,
   return (
     <Modal isOpen={isOpen} title={`עדכון סטטוס תשלום — ${registrant?.full_name ?? ''}`} onClose={onCancel}>
       <Select label="סטטוס חדש" name="status" value={status} onChange={setStatus} options={STATUS_OPTIONS} />
-      {errors.status && <p style={{ color: '#a13d3d' }}>{errors.status}</p>}
+      {errors.status && <p style={{ color: '#E0554F' }}>{errors.status}</p>}
       <TextField label="סיבה" name="reason" value={reason} onChange={setReason} error={errors.reason} required />
       <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-2)' }}>
         <Button onClick={handleConfirm}>אישור</Button>

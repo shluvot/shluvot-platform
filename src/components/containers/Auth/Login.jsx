@@ -21,13 +21,13 @@ export default function Login() {
   };
 
   return (
-    <div className="page" style={{ maxWidth: '24rem' }}>
-      <PageHeader title="כניסת צוות" />
+    <div className="page" style={{ maxWidth: '24rem', paddingBlock: 'var(--space-5) var(--space-6)' }}>
+      <PageHeader eyebrow="אדמין" title="כניסת צוות" />
       <Card>
         <form onSubmit={handleSubmit}>
           <TextField label="אימייל" name="email" type="email" value={email} onChange={setEmail} required />
           <TextField label="סיסמה" name="password" type="password" value={password} onChange={setPassword} required />
-          {error && <p style={{ color: '#a13d3d' }}>{error}</p>}
+          {error && <p style={{ color: '#E0554F', fontWeight: 600 }}>{error}</p>}
           <Button type="submit" disabled={status === 'loading'}>
             {status === 'loading' ? 'מתחבר...' : 'כניסה'}
           </Button>

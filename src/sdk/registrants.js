@@ -30,3 +30,8 @@ export async function updateRegistrant(id, patch) {
   if (error) throw error;
   return data;
 }
+
+export async function deleteRegistrant(id) {
+  const { error } = await supabase.from('registrants').delete().eq('id', id);
+  if (error) throw error;
+}

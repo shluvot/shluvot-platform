@@ -1,7 +1,7 @@
 export default function TextField({ label, name, value, onChange, type = 'text', error, required = false }) {
   return (
-    <label style={{ display: 'block', marginBottom: 'var(--space-2)' }}>
-      <span style={{ display: 'block', marginBottom: '0.3rem', fontSize: 'var(--text-sm)' }}>
+    <label style={{ display: 'block', marginBottom: 'var(--space-3)' }}>
+      <span style={{ display: 'block', marginBottom: '0.4rem', fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--color-purple)' }}>
         {label}
         {required ? ' *' : ''}
       </span>
@@ -13,13 +13,16 @@ export default function TextField({ label, name, value, onChange, type = 'text',
         required={required}
         style={{
           width: '100%',
-          padding: '0.6rem 0.8rem',
-          borderRadius: 'var(--radius)',
-          border: `1px solid ${error ? '#a13d3d' : 'var(--color-border)'}`,
+          padding: '0.7rem 1rem',
+          borderRadius: '10px',
+          border: `1.5px solid ${error ? '#E0554F' : 'var(--color-border)'}`,
           fontSize: 'var(--text-base)',
+          fontFamily: 'inherit',
+          background: '#fff',
+          color: 'var(--color-text)',
         }}
       />
-      {error && <span style={{ color: '#a13d3d', fontSize: 'var(--text-sm)' }}>{error}</span>}
+      {error && <span style={{ color: '#E0554F', fontSize: 'var(--text-sm)', fontWeight: 600 }}>{error}</span>}
     </label>
   );
 }

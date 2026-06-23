@@ -33,6 +33,9 @@ const adminRegistrantsSlice = createSlice({
         state.rows[index] = { ...state.rows[index], ...updated };
       }
     },
+    registrantRemovedLocally(state, action) {
+      state.rows = state.rows.filter((row) => row.id !== action.payload);
+    },
   },
 });
 
@@ -42,5 +45,6 @@ export const {
   listRequestFailed,
   filtersChanged,
   registrantUpdatedLocally,
+  registrantRemovedLocally,
 } = adminRegistrantsSlice.actions;
 export default adminRegistrantsSlice.reducer;

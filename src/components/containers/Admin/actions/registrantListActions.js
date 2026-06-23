@@ -5,6 +5,7 @@ import {
   listRequestFailed,
   filtersChanged,
   registrantUpdatedLocally,
+  registrantRemovedLocally,
 } from '../../../../store/reducers/adminRegistrantsReducer';
 
 export function loadRegistrants() {
@@ -35,5 +36,19 @@ export function overridePayment(registrant, { paymentId, status, reason }) {
         payments: [updatedPayment, ...(registrant.payments?.filter((p) => p.id !== paymentId) ?? [])],
       }),
     );
+  };
+}
+
+export function updateRegistrantDetails(id, patch) {
+  return async function (dispatch) {
+    const updated = await sdk.registrants.updateRegistrant(id, patch);
+    dispatch(registrantUpdatedLocally(updated));
+  };
+}
+
+export function deleteRegistrant(id) {
+  return async function (dispatch) {
+    await sdk.registrants.deleteRegistrant(id);
+    dispatch(registrantRemovedLocally(id));
   };
 }

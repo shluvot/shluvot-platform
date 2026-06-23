@@ -36,7 +36,7 @@ export default function ImageUploader({ currentUrl, onUpload, isUploading }) {
         </Button>
       )}
       <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
-      {error && <p style={{ color: '#a13d3d' }}>{error}</p>}
+      {error && <p style={{ color: '#E0554F' }}>{error}</p>}
     </div>
   );
 }

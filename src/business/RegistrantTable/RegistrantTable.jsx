@@ -14,7 +14,7 @@ const COLUMNS = [
   { key: 'actions', label: 'פעולות' },
 ];
 
-export default function RegistrantTable({ rows, onOverridePayment }) {
+export default function RegistrantTable({ rows, onOverridePayment, onEdit, onDelete }) {
   if (!rows || rows.length === 0) {
     return <EmptyState message="אין נרשמים להצגה" />;
   }
@@ -36,12 +36,20 @@ export default function RegistrantTable({ rows, onOverridePayment }) {
           case 'last_payment_date':
             return formatDate(lastPayment?.paid_at);
           case 'actions':
-            return lastPayment ? (
-              <button type="button" onClick={() => onOverridePayment(row, lastPayment)}>
-                עדכון סטטוס
-              </button>
-            ) : (
-              '—'
+            return (
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {lastPayment && (
+                  <button type="button" className="table-action-btn" onClick={() => onOverridePayment(row, lastPayment)}>
+                    עדכון סטטוס
+                  </button>
+                )}
+                <button type="button" className="table-action-btn" onClick={() => onEdit(row)}>
+                  ערוך
+                </button>
+                <button type="button" className="table-action-btn table-action-btn--danger" onClick={() => onDelete(row)}>
+                  מחיקה
+                </button>
+              </div>
             );
           default:
             return row[column.key];

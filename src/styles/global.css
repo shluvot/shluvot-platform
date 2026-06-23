@@ -94,3 +94,33 @@ textarea:focus {
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(46, 31, 71, 0.14);
 }
+
+.table-action-btn {
+  background: transparent;
+  border: 1.5px solid rgba(46, 31, 71, 0.25);
+  color: var(--color-purple);
+  border-radius: var(--radius-pill);
+  padding: 0.3rem 0.9rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.table-action-btn:hover {
+  border-color: var(--color-coral-pop);
+  color: var(--color-coral-pop);
+}
+
+.table-action-btn--danger {
+  border-color: rgba(224, 85, 79, 0.4);
+  color: #e0554f;
+}
+
+.table-action-btn--danger:hover {
+  border-color: #e0554f;
+  color: #e0554f;
+}
+
+.admin-table-row:hover {
+  background: rgba(220, 231, 251, 0.35);
+}
