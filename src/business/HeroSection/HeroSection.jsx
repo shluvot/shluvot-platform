@@ -103,32 +103,8 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
           </div>
 
           <div style={{ flex: '1 1 360px', minWidth: '300px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'right' }}>
-            <div
-              style={{
-                position: 'relative',
-                zIndex: 2,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: '#FFFFFF',
-                color: '#FF8C69',
-                fontFamily: 'var(--font-mono)',
-                fontWeight: 700,
-                fontSize: '13px',
-                letterSpacing: '2px',
-                padding: '9px 20px',
-                borderRadius: '999px',
-                boxShadow: '0 10px 24px rgba(46,31,71,.16)',
-                marginBottom: '-22px',
-              }}
-            >
-              {eyebrow}
-            </div>
-
             <h1
               style={{
-                position: 'relative',
-                zIndex: 1,
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 900,
                 fontSize: 'clamp(56px,9vw,132px)',
@@ -140,6 +116,20 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
             >
               {title}
             </h1>
+
+            <div style={{ width: '100%', height: '2px', background: 'rgba(46,31,71,.2)', margin: '16px 0 10px' }} />
+
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 700,
+                fontSize: '14px',
+                letterSpacing: '2px',
+                color: '#FF8C69',
+              }}
+            >
+              {eyebrow}
+            </div>
 
             {subtitle && (
               <p
