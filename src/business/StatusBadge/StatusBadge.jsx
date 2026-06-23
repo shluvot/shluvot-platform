@@ -7,25 +7,28 @@ const LABELS = {
   overdue: 'בפיגור',
 };
 
-const COLORS = {
-  pending: '#8a6d00',
-  active: '#1f6f43',
-  cancelled: '#6b6258',
-  paid: '#1f6f43',
-  failed: '#a13d3d',
-  overdue: '#a13d3d',
+const STYLES = {
+  pending: { bg: '#FFC857', color: '#2E1F47' },
+  active: { bg: '#4CAF82', color: '#fff' },
+  cancelled: { bg: '#9b9499', color: '#fff' },
+  paid: { bg: '#4CAF82', color: '#fff' },
+  failed: { bg: '#E0554F', color: '#fff' },
+  overdue: { bg: '#E0554F', color: '#fff' },
 };
 
 export default function StatusBadge({ status }) {
+  const style = STYLES[status] ?? { bg: '#9b9499', color: '#fff' };
+
   return (
     <span
       style={{
         display: 'inline-block',
-        padding: '0.2rem 0.7rem',
-        borderRadius: '1rem',
+        padding: '0.3rem 0.9rem',
+        borderRadius: 'var(--radius-pill)',
         fontSize: 'var(--text-sm)',
-        color: '#fff',
-        background: COLORS[status] ?? '#6b6258',
+        fontWeight: 700,
+        color: style.color,
+        background: style.bg,
       }}
     >
       {LABELS[status] ?? status}

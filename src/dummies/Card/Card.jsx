@@ -3,9 +3,9 @@ export default function Card({ children }) {
     <div
       style={{
         background: 'var(--color-surface)',
-        border: '1px solid var(--color-border)',
-        borderRadius: 'var(--radius)',
+        borderRadius: '16px',
         padding: 'var(--space-3)',
+        boxShadow: '0 10px 30px rgba(46,31,71,.08)',
       }}
     >
       {children}

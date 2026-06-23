@@ -70,3 +70,27 @@ select:focus,
 textarea:focus {
   border-color: var(--color-coral-pop);
 }
+
+.spinner-ring {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-coral-pop);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.article-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(46, 31, 71, 0.14);
+}

@@ -7,7 +7,7 @@ export default function ArticleGrid({ articles, emptyMessage = 'אין עדכו�
   }
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))', gap: 'var(--space-3)' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))', gap: 'var(--space-4)' }}>
       {articles.map((article) => (
         <ArticleCard key={article.id} article={article} />
       ))}

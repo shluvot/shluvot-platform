@@ -15,8 +15,8 @@ export default function UpdatesList() {
   }, []);
 
   return (
-    <div className="page">
-      <PageHeader title="עדכונים וחדשות" />
+    <div className="page" style={{ paddingBlock: 'var(--space-4) var(--space-6)' }}>
+      <PageHeader eyebrow="עדכונים" title="עדכונים וחדשות" subtitle="כל מה שחשוב לדעת על האיגוד ועל הפעילות שלנו" />
       {articles === null ? <Spinner /> : <ArticleGrid articles={articles} />}
     </div>
   );

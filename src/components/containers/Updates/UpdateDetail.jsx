@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import PageHeader from '../../../dummies/PageHeader/PageHeader';
 import Spinner from '../../../dummies/Spinner/Spinner';
 import EmptyState from '../../../dummies/EmptyState/EmptyState';
@@ -20,17 +20,22 @@ export default function UpdateDetail() {
   if (article === null) return <EmptyState message="העדכון לא נמצא" />;
 
   return (
-    <div className="page" style={{ maxWidth: '40rem' }}>
+    <div className="page" style={{ maxWidth: '40rem', paddingBlock: 'var(--space-4) var(--space-6)' }}>
+      <Link to="/updates" style={{ color: 'var(--color-coral-pop)', fontWeight: 700, textDecoration: 'none' }}>
+        → כל העדכונים
+      </Link>
       <PageHeader title={article.title} />
       {article.cover_image_url && (
         <img
           src={article.cover_image_url}
           alt=""
-          style={{ width: '100%', borderRadius: 'var(--radius)', marginBottom: 'var(--space-3)' }}
+          style={{ width: '100%', borderRadius: '16px', marginBottom: 'var(--space-4)', boxShadow: '0 10px 30px rgba(46,31,71,.1)' }}
         />
       )}
       {article.body.split('\n').map((paragraph, index) => (
-        <p key={index}>{paragraph}</p>
+        <p key={index} style={{ fontSize: '18px', lineHeight: 1.75, color: 'var(--color-text-muted)' }}>
+          {paragraph}
+        </p>
       ))}
     </div>
   );

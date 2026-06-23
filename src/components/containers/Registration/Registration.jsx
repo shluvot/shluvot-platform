@@ -13,8 +13,8 @@ export default function Registration() {
   }
 
   return (
-    <div className="page" style={{ maxWidth: '32rem' }}>
-      <PageHeader title="הרשמה לחברות באיגוד" subtitle={`שלב ${step + 1} מ-3`} />
+    <div className="page" style={{ maxWidth: '32rem', paddingBlock: 'var(--space-4) var(--space-6)' }}>
+      <PageHeader eyebrow="הצטרפות לאיגוד" title="הרשמה לחברות באיגוד" />
       <RegistrationWizard
         step={step}
         values={values}
@@ -26,7 +26,9 @@ export default function Registration() {
         onBack={() => dispatch(goBack())}
         onSubmit={() => dispatch(submitRegistration())}
       />
-      {status === 'error' && <p style={{ color: '#a13d3d' }}>אירעה שגיאה. נסו שוב.</p>}
+      {status === 'error' && (
+        <p style={{ color: '#E0554F', fontWeight: 600, marginTop: 'var(--space-2)' }}>אירעה שגיאה. נסו שוב.</p>
+      )}
     </div>
   );
 }
