@@ -8,6 +8,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -23,13 +24,14 @@ h1,
 h2,
 h3 {
   font-family: var(--font-heading);
-  font-weight: 800;
-  color: var(--color-brand);
-  line-height: 1.25;
+  font-weight: 900;
+  color: var(--color-purple);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
 }
 
 a {
-  color: var(--color-blue-dark);
+  color: var(--color-terracotta);
 }
 
 button {
@@ -49,12 +51,29 @@ button {
   padding-inline: var(--space-3);
 }
 
-/* מסגרת דקורטיבית קבועה מסביב לדף, בהשראת המיתוג */
-.page-frame {
-  position: fixed;
-  inset: 0.6rem;
-  border: 3px solid var(--color-pink);
-  border-radius: 1.75rem;
-  pointer-events: none;
-  z-index: 100;
+.desktop-nav {
+  display: none;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: var(--space-5);
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .desktop-nav {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,21 +1,26 @@
 :root {
-  --color-bg: #ffffff;
-  --color-surface: #ffffff;
-  --color-text: #2b2d3a;
-  --color-text-muted: #6b7280;
-  --color-border: #e7e9f0;
+  --color-bg: #f6efe3;
+  --color-surface: #fffdf8;
+  --color-text: #221c17;
+  --color-text-muted: #56504a;
+  --color-border: #d8cdba;
 
-  --color-blue: #4f7fc4;
-  --color-blue-dark: #355a96;
-  --color-pink: #ee7c95;
-  --color-pink-dark: #d85c79;
+  --color-purple-dark: #1e1336;
+  --color-purple: #2e1f47;
+  --color-purple-light: #3a2a5e;
+  --color-purple-accent: #9b7bd4;
+  --color-terracotta: #d2613f;
+  --color-coral: #e86a4e;
+  --color-mustard: #e9a93c;
+  --color-tan: #ece5d6;
 
-  --color-brand: var(--color-blue);
-  --color-brand-dark: var(--color-blue-dark);
-  --color-accent: var(--color-pink);
+  --color-brand: var(--color-purple);
+  --color-brand-dark: var(--color-purple-dark);
+  --color-accent: var(--color-terracotta);
 
-  --font-body: 'Rubik', system-ui, sans-serif;
-  --font-heading: 'Rubik', system-ui, sans-serif;
+  --font-body: 'Assistant', sans-serif;
+  --font-heading: 'Heebo', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 
   --space-1: 0.5rem;
   --space-2: 1rem;

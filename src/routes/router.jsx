@@ -1,8 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Landing from '../components/containers/Landing/Landing';
-import AboutPage from '../components/containers/InfoPages/AboutPage';
-import ServicesPage from '../components/containers/InfoPages/ServicesPage';
-import ContactPage from '../components/containers/InfoPages/ContactPage';
 import UpdatesList from '../components/containers/Updates/UpdatesList';
 import UpdateDetail from '../components/containers/Updates/UpdateDetail';
 import Registration from '../components/containers/Registration/Registration';
@@ -20,9 +17,6 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { index: true, element: <Landing /> },
-      { path: 'about', element: <AboutPage /> },
-      { path: 'services', element: <ServicesPage /> },
-      { path: 'contact', element: <ContactPage /> },
       { path: 'updates', element: <UpdatesList /> },
       { path: 'updates/:slug', element: <UpdateDetail /> },
       { path: 'registration', element: <Registration /> },
