@@ -125,7 +125,7 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
                 letterSpacing: '2px',
                 color: '#FF8C69',
                 marginTop: '4px',
-                transform: 'translateX(16px)',
+                transform: 'translateX(4px)',
               }}
             >
               {eyebrow}
