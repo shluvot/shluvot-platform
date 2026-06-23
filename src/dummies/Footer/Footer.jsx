@@ -6,7 +6,7 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#1E1336', color: '#F6EFE3', padding: '48px 28px 32px' }}>
+    <footer style={{ background: '#4B3876', color: '#F6EFE3', padding: '48px 28px 32px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '26px', letterSpacing: '-.5px' }}>שלובות</div>

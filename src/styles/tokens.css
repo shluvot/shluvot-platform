@@ -1,10 +1,11 @@
 :root {
-  --color-bg: #f6efe3;
+  --color-bg: #fff8f0;
   --color-surface: #fffdf8;
   --color-text: #221c17;
-  --color-text-muted: #56504a;
-  --color-border: #d8cdba;
+  --color-text-muted: #5b5168;
+  --color-border: #e3d9ee;
 
+  /* "דיו" כהה - שימש בעבר כרקע ה-Hero, עכשיו טקסט/הדגשות בלבד על רקעים פסטליים בהירים */
   --color-purple-dark: #1e1336;
   --color-purple: #2e1f47;
   --color-purple-light: #3a2a5e;
@@ -13,6 +14,16 @@
   --color-coral: #e86a4e;
   --color-mustard: #e9a93c;
   --color-tan: #ece5d6;
+
+  /* פלטת פסטל בהירה/כיפית - רקעי הסקשנים והאקצנטים של העיצוב המעודכן */
+  --color-lavender-light: #dce7fb;
+  --color-mint-light: #d9f2e3;
+  --color-peach-light: #ffe3d1;
+  --color-footer-purple: #4b3876;
+  --color-coral-pop: #ff8c69;
+  --color-yellow-pop: #ffc857;
+  --color-sky-pop: #4fc3d9;
+  --color-purple-pop: #b79ced;
 
   --color-brand: var(--color-purple);
   --color-brand-dark: var(--color-purple-dark);

@@ -5,7 +5,7 @@ export default function AboutSection({ label, heading, body }) {
   const paragraphs = (body ?? '').split('\n').filter(Boolean);
 
   return (
-    <section id="about" style={{ background: '#F6EFE3', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    <section id="about" style={{ background: '#FFF8F0', padding: 'clamp(64px,9vw,110px) 28px' }}>
       <div
         style={{
           maxWidth: '1100px',
@@ -37,7 +37,7 @@ export default function AboutSection({ label, heading, body }) {
               right: '-22px',
               width: '100%',
               height: '100%',
-              background: '#E9A93C',
+              background: '#FFC857',
               borderRadius: '18px',
               zIndex: 0,
             }}

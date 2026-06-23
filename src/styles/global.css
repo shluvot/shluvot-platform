@@ -31,7 +31,7 @@ h3 {
 }
 
 a {
-  color: var(--color-terracotta);
+  color: var(--color-coral-pop);
 }
 
 button {
@@ -68,5 +68,5 @@ button {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #d2613f;
+  border-color: var(--color-coral-pop);
 }

@@ -53,9 +53,9 @@ export default function IllustrationCarousel({ frames, captions }) {
           height: 'clamp(418px, 42vw, 564px)',
           borderRadius: '228px 228px 24px 24px',
           overflow: 'hidden',
-          boxShadow: '0 30px 70px rgba(0,0,0,.4)',
+          boxShadow: '0 30px 70px rgba(46,31,71,.25)',
           background: '#3A2A5E',
-          border: '5px solid #F6EFE3',
+          border: '5px solid #FFFFFF',
         }}
       >
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', direction: 'ltr' }}>

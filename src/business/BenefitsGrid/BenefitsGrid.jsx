@@ -1,19 +1,19 @@
 import MonoLabel from '../../dummies/MonoLabel/MonoLabel';
 
 const BADGE_STYLES = [
-  { bg: '#E86A4E', color: '#fff', shadow: 'rgba(232,106,78,.4)' },
-  { bg: '#E9A93C', color: '#231a0a', shadow: 'rgba(233,169,60,.4)' },
-  { bg: '#D2613F', color: '#fff', shadow: 'rgba(210,97,63,.4)' },
-  { bg: '#2E1F47', color: '#F6EFE3', shadow: 'rgba(46,31,71,.35)' },
-  { bg: '#E86A4E', color: '#fff', shadow: 'rgba(232,106,78,.4)' },
-  { bg: '#E9A93C', color: '#231a0a', shadow: 'rgba(233,169,60,.4)' },
+  { bg: '#FF8C69', color: '#fff', shadow: 'rgba(255,140,105,.4)' },
+  { bg: '#FFC857', color: '#2E1F47', shadow: 'rgba(255,200,87,.45)' },
+  { bg: '#4FC3D9', color: '#fff', shadow: 'rgba(79,195,217,.4)' },
+  { bg: '#B79CED', color: '#fff', shadow: 'rgba(183,156,237,.4)' },
+  { bg: '#FF8C69', color: '#fff', shadow: 'rgba(255,140,105,.4)' },
+  { bg: '#FFC857', color: '#2E1F47', shadow: 'rgba(255,200,87,.45)' },
 ];
 
 export default function BenefitsGrid({ label, heading, items }) {
   if (!items?.length) return null;
 
   return (
-    <section id="benefits" style={{ background: '#ECE5D6', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    <section id="benefits" style={{ background: '#D9F2E3', padding: 'clamp(64px,9vw,110px) 28px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(40px,5vw,60px)' }}>
           <MonoLabel color="#D2613F">{label}</MonoLabel>

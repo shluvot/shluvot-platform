@@ -36,7 +36,7 @@ export default function ContactSection({ label, heading, body, phone, email, onS
   };
 
   return (
-    <section id="contact" style={{ background: '#F6EFE3', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    <section id="contact" style={{ background: '#FFF8F0', padding: 'clamp(64px,9vw,110px) 28px' }}>
       <div
         style={{
           maxWidth: '1040px',
@@ -57,7 +57,7 @@ export default function ContactSection({ label, heading, body, phone, email, onS
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {phone && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '16px', color: '#221C17', fontWeight: 600 }}>
-                <span style={{ width: '36px', height: '36px', background: '#E9A93C', borderRadius: '9px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#231a0a', fontWeight: 800 }}>
+                <span style={{ width: '36px', height: '36px', background: '#FFC857', borderRadius: '9px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2E1F47', fontWeight: 800 }}>
                   ☎
                 </span>
                 <span className="ltr-inline">{phone}</span>
@@ -65,7 +65,7 @@ export default function ContactSection({ label, heading, body, phone, email, onS
             )}
             {email && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '16px', color: '#221C17', fontWeight: 600 }}>
-                <span style={{ width: '36px', height: '36px', background: '#E86A4E', borderRadius: '9px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800 }}>
+                <span style={{ width: '36px', height: '36px', background: '#FF8C69', borderRadius: '9px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800 }}>
                   @
                 </span>
                 <span className="ltr-inline">{email}</span>
@@ -79,7 +79,7 @@ export default function ContactSection({ label, heading, body, phone, email, onS
 
           {sent ? (
             <div style={{ position: 'relative', zIndex: 1, background: '#FFFDF8', borderRadius: '18px', padding: 'clamp(40px,5vw,56px)', boxShadow: '0 20px 50px rgba(46,31,71,.14)', textAlign: 'center' }}>
-              <div style={{ width: '64px', height: '64px', background: '#E9A93C', borderRadius: '50%', margin: '0 auto 22px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px', color: '#231a0a' }}>
+              <div style={{ width: '64px', height: '64px', background: '#FFC857', borderRadius: '50%', margin: '0 auto 22px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px', color: '#2E1F47' }}>
                 ✓
               </div>
               <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '30px', margin: '0 0 12px', color: '#2E1F47' }}>קיבלנו, תודה!</h3>
@@ -119,7 +119,7 @@ export default function ContactSection({ label, heading, body, phone, email, onS
                 type="submit"
                 disabled={submitting}
                 style={{
-                  background: '#D2613F',
+                  background: '#FF8C69',
                   color: '#fff',
                   border: 'none',
                   fontFamily: 'var(--font-body)',
@@ -128,7 +128,7 @@ export default function ContactSection({ label, heading, body, phone, email, onS
                   padding: '15px',
                   borderRadius: '12px',
                   cursor: submitting ? 'not-allowed' : 'pointer',
-                  boxShadow: '0 12px 28px rgba(210,97,63,.4)',
+                  boxShadow: '0 12px 28px rgba(255,140,105,.45)',
                   opacity: submitting ? 0.7 : 1,
                 }}
               >
