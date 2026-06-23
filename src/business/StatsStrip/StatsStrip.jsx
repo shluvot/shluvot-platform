@@ -2,40 +2,22 @@ export default function StatsStrip({ items }) {
   if (!items?.length) return null;
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', background: 'var(--color-purple)', paddingBlock: 'var(--space-6)' }}>
+    <section style={{ background: '#2E1F47', color: '#F6EFE3', padding: 'clamp(56px,7vw,84px) 28px', position: 'relative', overflow: 'hidden' }}>
       <div
         aria-hidden="true"
-        style={{
-          position: 'absolute',
-          insetInlineStart: '-6rem',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          width: '18rem',
-          height: '18rem',
-          borderRadius: '50%',
-          background: 'var(--color-purple-accent)',
-          opacity: 0.18,
-          filter: 'blur(40px)',
-        }}
+        style={{ position: 'absolute', top: '-30px', left: '8%', width: '140px', height: '140px', background: '#E86A4E', borderRadius: '50%', opacity: 0.18 }}
       />
-      <div
-        className="page"
-        style={{
-          position: 'relative',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(10rem, 1fr))',
-          gap: 'var(--space-4)',
-          textAlign: 'center',
-        }}
-      >
-        {items.map((item, index) => (
-          <div key={index}>
-            <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'var(--text-2xl)', color: 'var(--color-mustard)' }}>
-              {item.value}
+      <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '36px', textAlign: 'center' }}>
+          {items.map((item, index) => (
+            <div key={index}>
+              <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(48px,6vw,72px)', lineHeight: 1, color: '#E9A93C' }}>
+                {item.value}
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: 600, color: 'rgba(246,239,227,.85)', marginTop: '8px' }}>{item.label}</div>
             </div>
-            <div style={{ color: 'rgba(255,255,255,0.78)', fontSize: 'var(--text-sm)', marginTop: '0.4rem' }}>{item.label}</div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

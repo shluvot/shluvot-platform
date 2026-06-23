@@ -32,59 +32,76 @@ export default function IllustrationCarousel({ frames, captions }) {
     };
   }, []);
 
+  // הטראק חייב direction:ltr קשיח, בלי תלות בכיווניות RTL של הדף - אחרת flex הופך
+  // את סדר הפריימים ו-translateX זז לכיוון ההפוך ממה שהמתמטיקה מצפה לו.
   const trackStyle = {
     display: 'flex',
+    height: '100%',
     width: `${FRAME_COUNT * 100}%`,
     transform: `translateX(-${idx * 20}%)`,
     transition,
+    willChange: 'transform',
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div
         style={{
+          position: 'relative',
+          zIndex: 2,
+          width: 'clamp(320px, 32vw, 432px)',
+          height: 'clamp(418px, 42vw, 564px)',
           borderRadius: '228px 228px 24px 24px',
           overflow: 'hidden',
-          aspectRatio: '348 / 454',
-          boxShadow: '0 24px 60px rgba(30, 19, 54, 0.35)',
+          boxShadow: '0 30px 70px rgba(0,0,0,.4)',
+          background: '#3A2A5E',
+          border: '5px solid #F6EFE3',
         }}
       >
-        <div style={trackStyle}>
-          {frames.map((frame, i) => (
-            <div key={i} style={{ flex: '0 0 20%' }}>
-              {frame}
-            </div>
-          ))}
+        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', direction: 'ltr' }}>
+          <div style={trackStyle}>
+            {frames.map((frame, i) => (
+              <div key={i} style={{ flex: '0 0 20%', height: '100%' }}>
+                {frame}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       <div
         style={{
-          marginTop: '1.5rem',
-          marginInline: 'auto',
-          maxWidth: '20rem',
-          background: 'var(--color-purple-light)',
-          borderRadius: 'var(--radius-pill)',
+          position: 'relative',
+          zIndex: 3,
+          marginTop: '-28px',
+          width: 'clamp(300px, 26vw, 392px)',
+          height: '58px',
           overflow: 'hidden',
-          padding: '0.9rem 0',
+          background: '#D2613F',
+          borderRadius: '999px',
+          boxShadow: '0 16px 38px rgba(0,0,0,.34)',
+          direction: 'ltr',
         }}
       >
         <div style={trackStyle}>
           {captions.map((caption, i) => (
-            <div
+            <span
               key={i}
               style={{
                 flex: '0 0 20%',
-                textAlign: 'center',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                direction: 'rtl',
                 color: '#fff',
-                fontWeight: 600,
-                fontSize: 'var(--text-sm)',
+                fontWeight: 800,
+                fontSize: 'clamp(16px, 1.7vw, 21px)',
                 whiteSpace: 'nowrap',
-                padding: '0 1rem',
               }}
             >
               {caption}
-            </div>
+            </span>
           ))}
         </div>
       </div>
