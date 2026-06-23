@@ -5,6 +5,7 @@ import { HERO_FRAMES, HERO_CAPTIONS } from './illustrations';
 const NAV_LINKS = [
   { href: '#about', label: 'אודות' },
   { href: '#benefits', label: 'יתרונות' },
+  { to: '/updates', label: 'עדכונים' },
   { href: '#contact', label: 'צרו קשר' },
 ];
 
@@ -73,11 +74,18 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
           שלובות
         </div>
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '26px', rowGap: '10px', justifyContent: 'flex-end' }}>
-          {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} style={{ color: '#2E1F47', textDecoration: 'none', fontWeight: 600, fontSize: '15px', opacity: 0.85, whiteSpace: 'nowrap' }}>
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const linkStyle = { color: '#2E1F47', textDecoration: 'none', fontWeight: 600, fontSize: '15px', opacity: 0.85, whiteSpace: 'nowrap' };
+            return link.to ? (
+              <Link key={link.to} to={link.to} style={linkStyle}>
+                {link.label}
+              </Link>
+            ) : (
+              <a key={link.href} href={link.href} style={linkStyle}>
+                {link.label}
+              </a>
+            );
+          })}
           <Link
             to="/registration"
             style={{

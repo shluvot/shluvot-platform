@@ -176,6 +176,28 @@ export default function ContentManager() {
         onSave={(value) => save('value_props')({ ...blocks.value_props, items: value.items })}
       />
 
+      <Card>
+        <h3>סקשן עדכונים (בדף הנחיתה)</h3>
+        <TextField
+          label="תווית (// ...)"
+          name="updates_preview_label"
+          value={blocks.updates_preview?.label ?? ''}
+          onChange={(v) => dispatch(saveBlock('updates_preview', { ...blocks.updates_preview, label: v }))}
+        />
+        <TextField
+          label="כותרת"
+          name="updates_preview_heading"
+          value={blocks.updates_preview?.heading ?? ''}
+          onChange={(v) => dispatch(saveBlock('updates_preview', { ...blocks.updates_preview, heading: v }))}
+        />
+        <TextField
+          label="טקסט כפתור (CTA)"
+          name="updates_preview_cta"
+          value={blocks.updates_preview?.ctaLabel ?? ''}
+          onChange={(v) => dispatch(saveBlock('updates_preview', { ...blocks.updates_preview, ctaLabel: v }))}
+        />
+      </Card>
+
       <HeadingBodyEditor
         title="אזור יצירת קשר"
         initialValue={blocks.contact_page ?? {}}

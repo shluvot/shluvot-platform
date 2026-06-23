@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
+
 const LINKS = [
-  { href: '#about', label: 'אודות' },
-  { href: '#benefits', label: 'יתרונות' },
-  { href: '#contact', label: 'צרו קשר' },
+  { to: '/#about', label: 'אודות' },
+  { to: '/#benefits', label: 'יתרונות' },
+  { to: '/updates', label: 'עדכונים' },
+  { to: '/#contact', label: 'צרו קשר' },
 ];
 
 export default function Footer() {
@@ -14,9 +17,9 @@ export default function Footer() {
         </div>
         <nav style={{ display: 'flex', flexWrap: 'wrap', gap: '24px' }}>
           {LINKS.map((link) => (
-            <a key={link.href} href={link.href} style={{ color: 'rgba(246,239,227,.85)', textDecoration: 'none', fontWeight: 600, fontSize: '15px' }}>
+            <Link key={link.to} to={link.to} style={{ color: 'rgba(246,239,227,.85)', textDecoration: 'none', fontWeight: 600, fontSize: '15px' }}>
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
