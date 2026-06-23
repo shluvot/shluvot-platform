@@ -105,21 +105,30 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
           <div style={{ flex: '1 1 360px', minWidth: '300px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'right' }}>
             <div
               style={{
+                position: 'relative',
+                zIndex: 2,
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '10px',
+                gap: '8px',
+                background: '#FFFFFF',
+                color: '#FF8C69',
                 fontFamily: 'var(--font-mono)',
+                fontWeight: 700,
                 fontSize: '13px',
                 letterSpacing: '2px',
-                color: 'rgba(46,31,71,.65)',
-                marginBottom: '12px',
+                padding: '9px 20px',
+                borderRadius: '999px',
+                boxShadow: '0 10px 24px rgba(46,31,71,.16)',
+                marginBottom: '-22px',
               }}
             >
-              — {eyebrow} —
+              {eyebrow}
             </div>
 
             <h1
               style={{
+                position: 'relative',
+                zIndex: 1,
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 900,
                 fontSize: 'clamp(56px,9vw,132px)',
