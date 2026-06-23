@@ -54,7 +54,7 @@ export default function IllustrationCarousel({ frames, captions }) {
           borderRadius: '228px 228px 24px 24px',
           overflow: 'hidden',
           boxShadow: '0 30px 70px rgba(46,31,71,.25)',
-          background: '#3A2A5E',
+          background: '#BFE0F2',
           border: '5px solid #FFFFFF',
         }}
       >
