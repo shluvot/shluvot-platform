@@ -21,7 +21,7 @@ export default function UpdateDetail() {
 
   return (
     <div className="page" style={{ maxWidth: '40rem', paddingBlock: 'var(--space-4) var(--space-6)' }}>
-      <Link to="/updates" style={{ color: 'var(--color-coral-pop)', fontWeight: 700, textDecoration: 'none' }}>
+      <Link to="/updates" style={{ color: 'var(--color-terracotta)', fontWeight: 700, textDecoration: 'none' }}>
         → כל העדכונים
       </Link>
       <PageHeader title={article.title} />

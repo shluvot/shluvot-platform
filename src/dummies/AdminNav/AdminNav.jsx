@@ -20,7 +20,7 @@ export default function AdminNav() {
             padding: '0.5rem 1.1rem',
             borderRadius: 'var(--radius-pill)',
             color: isActive ? '#fff' : 'var(--color-purple)',
-            background: isActive ? 'var(--color-coral-pop)' : 'var(--color-surface)',
+            background: isActive ? 'var(--color-terracotta)' : 'var(--color-surface)',
             boxShadow: isActive ? '0 8px 18px rgba(255,140,105,.35)' : '0 4px 12px rgba(46,31,71,.06)',
           })}
         >

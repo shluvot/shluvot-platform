@@ -77,7 +77,7 @@ export default function IllustrationCarousel({ frames, captions }) {
           width: 'clamp(300px, 26vw, 392px)',
           height: '58px',
           overflow: 'hidden',
-          background: '#D2613F',
+          background: 'var(--color-terracotta)',
           borderRadius: '999px',
           boxShadow: '0 16px 38px rgba(0,0,0,.34)',
           direction: 'ltr',

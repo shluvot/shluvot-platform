@@ -1,6 +1,6 @@
 const VARIANT_STYLES = {
   primary: {
-    background: 'var(--color-coral-pop)',
+    background: 'var(--color-terracotta)',
     color: '#fff',
     border: 'none',
     boxShadow: '0 10px 24px rgba(255,140,105,.35)',

@@ -49,7 +49,7 @@ export default function AppLayout() {
             <Link
               to="/registration"
               style={{
-                background: 'var(--color-coral-pop)',
+                background: 'var(--color-terracotta)',
                 color: '#fff',
                 textDecoration: 'none',
                 fontWeight: 700,

@@ -18,14 +18,14 @@ export default function ArticleCard({ article }) {
         {article.cover_image_url ? (
           <img src={article.cover_image_url} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover' }} />
         ) : (
-          <div style={{ width: '100%', aspectRatio: '16/9', background: 'var(--color-lavender-light)' }} />
+          <div style={{ width: '100%', aspectRatio: '16/9', background: 'var(--color-section-warm)' }} />
         )}
         <div style={{ padding: 'var(--space-3)' }}>
           <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.15rem', margin: '0 0 0.4rem', color: 'var(--color-purple)' }}>
             {article.title}
           </h3>
           {article.excerpt && <p style={{ color: 'var(--color-text-muted)', margin: 0 }}>{article.excerpt}</p>}
-          <span style={{ display: 'inline-block', marginTop: '0.8rem', color: 'var(--color-coral-pop)', fontWeight: 700, fontSize: 'var(--text-sm)' }}>
+          <span style={{ display: 'inline-block', marginTop: '0.8rem', color: 'var(--color-terracotta)', fontWeight: 700, fontSize: 'var(--text-sm)' }}>
             קראו עוד ←
           </span>
         </div>

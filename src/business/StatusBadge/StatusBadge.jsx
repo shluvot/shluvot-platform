@@ -8,7 +8,7 @@ const LABELS = {
 };
 
 const STYLES = {
-  pending: { bg: '#FFC857', color: '#2E1F47' },
+  pending: { bg: 'var(--color-gold)', color: 'var(--color-purple)' },
   active: { bg: '#4CAF82', color: '#fff' },
   cancelled: { bg: '#9b9499', color: '#fff' },
   paid: { bg: '#4CAF82', color: '#fff' },

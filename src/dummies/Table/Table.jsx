@@ -11,7 +11,7 @@ export default function Table({ columns, rows, renderCell, getRowKey }) {
                   textAlign: 'start',
                   padding: '0.9rem 1rem',
                   borderBottom: '1.5px solid var(--color-border)',
-                  background: 'var(--color-lavender-light)',
+                  background: 'var(--color-section-warm)',
                   fontSize: 'var(--text-sm)',
                   fontWeight: 700,
                   color: 'var(--color-purple)',

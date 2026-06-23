@@ -44,7 +44,7 @@ export default function PaymentReturn() {
             style={{
               width: '64px',
               height: '64px',
-              background: 'var(--color-yellow-pop)',
+              background: 'var(--color-gold)',
               borderRadius: '50%',
               margin: '0 auto 1rem',
               display: 'flex',

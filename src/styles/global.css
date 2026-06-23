@@ -31,7 +31,7 @@ h3 {
 }
 
 a {
-  color: var(--color-coral-pop);
+  color: var(--color-terracotta);
 }
 
 button {
@@ -69,7 +69,7 @@ button {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--color-coral-pop);
+  border-color: var(--color-terracotta);
 }
 
 .spinner-ring {
@@ -77,7 +77,7 @@ textarea:focus {
   height: 2rem;
   border-radius: 50%;
   border: 3px solid var(--color-border);
-  border-top-color: var(--color-coral-pop);
+  border-top-color: var(--color-terracotta);
   animation: spin 0.8s linear infinite;
 }
 
@@ -108,8 +108,8 @@ textarea:focus {
 }
 
 .table-action-btn:hover {
-  border-color: var(--color-coral-pop);
-  color: var(--color-coral-pop);
+  border-color: var(--color-terracotta);
+  color: var(--color-terracotta);
 }
 
 .table-action-btn--danger {

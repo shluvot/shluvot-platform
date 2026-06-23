@@ -9,11 +9,19 @@ const NAV_LINKS = [
   { href: '#contact', label: 'צרו קשר' },
 ];
 
-const BADGE_DOT_COLORS = ['#FFC857', '#FF8C69', '#4FC3D9'];
+const BADGE_DOT_COLORS = ['var(--color-gold)', 'var(--color-terracotta)', 'var(--color-sage)'];
 
 export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, secondaryCtaLabel, badges }) {
   return (
-    <section style={{ position: 'relative', background: '#DCE7FB', color: '#2E1F47', overflow: 'hidden', padding: '0 0 64px' }}>
+    <section
+      style={{
+        position: 'relative',
+        background: 'var(--color-purple-dark)',
+        color: 'var(--color-cream-text)',
+        overflow: 'hidden',
+        padding: '0 0 64px',
+      }}
+    >
       <div
         aria-hidden="true"
         style={{
@@ -22,9 +30,9 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
           left: 0,
           width: 'clamp(160px,26vw,340px)',
           height: 'clamp(150px,24vw,300px)',
-          background: '#FFC857',
+          background: 'var(--color-gold)',
           clipPath: 'polygon(0 0,100% 0,0 100%)',
-          opacity: 0.85,
+          opacity: 0.18,
           zIndex: 0,
         }}
       />
@@ -36,10 +44,10 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
           right: '-50px',
           width: 'clamp(220px,30vw,420px)',
           height: 'clamp(140px,18vw,240px)',
-          background: '#FF8C69',
+          background: 'var(--color-terracotta)',
           transform: 'rotate(-9deg)',
           borderRadius: '14px',
-          opacity: 0.8,
+          opacity: 0.22,
           zIndex: 0,
         }}
       />
@@ -51,7 +59,7 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
           right: '8%',
           width: '120px',
           height: '120px',
-          border: '2px solid rgba(46,31,71,.18)',
+          border: '2px solid rgba(247,241,232,.15)',
           borderRadius: '50%',
           zIndex: 0,
         }}
@@ -70,12 +78,12 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
           gap: '24px',
         }}
       >
-        <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '24px', letterSpacing: '-.5px', color: '#2E1F47' }}>
+        <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '24px', letterSpacing: '-.5px', color: 'var(--color-cream-text)' }}>
           שלובות
         </div>
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '26px', rowGap: '10px', justifyContent: 'flex-end' }}>
           {NAV_LINKS.map((link) => {
-            const linkStyle = { color: '#2E1F47', textDecoration: 'none', fontWeight: 600, fontSize: '15px', opacity: 0.85, whiteSpace: 'nowrap' };
+            const linkStyle = { color: 'var(--color-cream-text)', textDecoration: 'none', fontWeight: 600, fontSize: '15px', opacity: 0.85, whiteSpace: 'nowrap' };
             return link.to ? (
               <Link key={link.to} to={link.to} style={linkStyle}>
                 {link.label}
@@ -89,14 +97,14 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
           <Link
             to="/registration"
             style={{
-              background: '#FF8C69',
+              background: 'var(--color-terracotta)',
               color: '#fff',
               textDecoration: 'none',
               fontWeight: 700,
               fontSize: '15px',
               padding: '9px 20px',
               borderRadius: '999px',
-              boxShadow: '0 6px 18px rgba(255,140,105,.4)',
+              boxShadow: '0 6px 18px rgba(196,78,46,.4)',
             }}
           >
             הצטרפו
@@ -119,7 +127,7 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
                 lineHeight: 0.86,
                 letterSpacing: '-2px',
                 margin: 0,
-                color: '#2E1F47',
+                color: 'var(--color-cream-text)',
               }}
             >
               {title}
@@ -131,7 +139,7 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
                 fontWeight: 700,
                 fontSize: '16px',
                 letterSpacing: '2px',
-                color: '#FF8C69',
+                color: 'var(--color-gold)',
                 marginTop: '4px',
                 paddingRight: '5px',
               }}
@@ -146,7 +154,7 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
                   margin: '26px 0 0',
                   fontSize: 'clamp(17px,1.6vw,20px)',
                   lineHeight: 1.65,
-                  color: '#4B435A',
+                  color: 'rgba(247,241,232,.75)',
                   textAlign: 'right',
                 }}
               >
@@ -159,14 +167,14 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
                 <Link
                   to="/registration"
                   style={{
-                    background: '#FF8C69',
+                    background: 'var(--color-terracotta)',
                     color: '#fff',
                     textDecoration: 'none',
                     fontWeight: 800,
                     fontSize: '17px',
                     padding: '15px 34px',
                     borderRadius: '12px',
-                    boxShadow: '0 14px 30px rgba(255,140,105,.5)',
+                    boxShadow: '0 14px 30px rgba(196,78,46,.45)',
                   }}
                 >
                   {ctaLabel}
@@ -177,13 +185,13 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
                   href="#about"
                   style={{
                     background: 'transparent',
-                    color: '#2E1F47',
+                    color: 'var(--color-cream-text)',
                     textDecoration: 'none',
                     fontWeight: 700,
                     fontSize: '17px',
                     padding: '15px 30px',
                     borderRadius: '12px',
-                    border: '1.5px solid rgba(46,31,71,.3)',
+                    border: '1.5px solid rgba(247,241,232,.35)',
                   }}
                 >
                   {secondaryCtaLabel}
@@ -200,9 +208,9 @@ export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, second
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '8px',
-                      background: 'rgba(255,255,255,.55)',
-                      border: '1px solid rgba(46,31,71,.18)',
-                      color: '#2E1F47',
+                      background: 'rgba(247,241,232,.1)',
+                      border: '1px solid rgba(247,241,232,.22)',
+                      color: 'var(--color-cream-text)',
                       fontWeight: 600,
                       fontSize: '14px',
                       padding: '9px 18px',

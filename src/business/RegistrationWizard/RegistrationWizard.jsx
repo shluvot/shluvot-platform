@@ -14,7 +14,7 @@ function StepProgress({ step }) {
             style={{
               height: '6px',
               borderRadius: 'var(--radius-pill)',
-              background: index <= step ? 'var(--color-coral-pop)' : 'var(--color-border)',
+              background: index <= step ? 'var(--color-terracotta)' : 'var(--color-border)',
               marginBottom: '0.4rem',
             }}
           />

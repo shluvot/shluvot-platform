@@ -20,12 +20,12 @@ export default function MembershipPlanSelector({ billingCycle, onSelectCycle }) 
                 justifyContent: 'center',
                 gap: '0.5rem',
                 background: isSelected ? 'rgba(255,140,105,.1)' : 'var(--color-surface)',
-                border: `2px solid ${isSelected ? 'var(--color-coral-pop)' : 'var(--color-border)'}`,
+                border: `2px solid ${isSelected ? 'var(--color-terracotta)' : 'var(--color-border)'}`,
                 borderRadius: '14px',
                 padding: '0.9rem 1rem',
                 cursor: 'pointer',
                 fontWeight: 700,
-                color: isSelected ? 'var(--color-coral-pop)' : 'var(--color-text)',
+                color: isSelected ? 'var(--color-terracotta)' : 'var(--color-text)',
               }}
             >
               <input
@@ -34,7 +34,7 @@ export default function MembershipPlanSelector({ billingCycle, onSelectCycle }) 
                 value={plan.billingCycle}
                 checked={isSelected}
                 onChange={() => onSelectCycle(plan.billingCycle)}
-                style={{ accentColor: 'var(--color-coral-pop)' }}
+                style={{ accentColor: 'var(--color-terracotta)' }}
               />
               {plan.label}
             </label>

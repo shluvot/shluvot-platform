@@ -5,7 +5,7 @@ export default function AboutSection({ label, heading, body }) {
   const paragraphs = (body ?? '').split('\n').filter(Boolean);
 
   return (
-    <section id="about" style={{ background: '#FFF8F0', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    <section id="about" style={{ background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px' }}>
       <div
         style={{
           maxWidth: '1100px',
@@ -17,12 +17,12 @@ export default function AboutSection({ label, heading, body }) {
         }}
       >
         <div>
-          <MonoLabel color="#D2613F">{label}</MonoLabel>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(34px,5vw,52px)', lineHeight: 1.08, margin: '0 0 22px', color: '#2E1F47', letterSpacing: '-1px', whiteSpace: 'pre-line' }}>
+          <MonoLabel color="var(--color-terracotta)">{label}</MonoLabel>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(34px,5vw,52px)', lineHeight: 1.08, margin: '0 0 22px', color: 'var(--color-purple)', letterSpacing: '-1px', whiteSpace: 'pre-line' }}>
             {heading}
           </h2>
           {paragraphs.map((paragraph, i) => (
-            <p key={i} style={{ fontSize: '18px', lineHeight: 1.75, color: '#46403a', margin: i === paragraphs.length - 1 ? 0 : '0 0 18px' }}>
+            <p key={i} style={{ fontSize: '18px', lineHeight: 1.75, color: 'var(--color-text-muted)', margin: i === paragraphs.length - 1 ? 0 : '0 0 18px' }}>
               {paragraph}
             </p>
           ))}
@@ -37,7 +37,7 @@ export default function AboutSection({ label, heading, body }) {
               right: '-22px',
               width: '100%',
               height: '100%',
-              background: '#FFC857',
+              background: 'var(--color-gold)',
               borderRadius: '18px',
               zIndex: 0,
             }}
@@ -50,8 +50,8 @@ export default function AboutSection({ label, heading, body }) {
               height: 'clamp(280px,40vw,420px)',
               borderRadius: '18px',
               overflow: 'hidden',
-              background: '#E7DFF1',
-              boxShadow: '0 24px 50px rgba(46,31,71,.25)',
+              background: 'var(--color-tan)',
+              boxShadow: '0 24px 50px rgba(36,26,46,.25)',
             }}
           >
             <AboutIllustration />
