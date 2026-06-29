@@ -20,18 +20,161 @@ body {
   text-align: start;
 }
 
+/* כניסת כותרת ההירו: "ברוכה הבאה" דועך-ועולה כמו קודם, ושם האיגוד מופיע גלוי מהרגע
+   הראשון (לא נעלם/קופץ) אבל עם ריחוק-אותיות גדול שמתכנס לרווח הסופי - כאילו האותיות
+   "נאספות" אחת לשנייה. ה-key={title} ב-HeroSection מבטיח שהאנימציה רצה כשהטקסט בפועל
+   מגיע מה-CMS (לא לפני כן על אלמנט ריק) - אחרת היא "נשרפת" על תוכן ריק והטקסט פשוט
+   מופיע בבת-אחת כשהוא נטען, מה שמרגיש כמו קפיצה. */
+@keyframes heroFadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* האותיות מתחילות קטנות ומרוחקות ו"נאספות" פנימה לגודל/ריחוק הסופי, באיזינג ease-in
+   (לאט בהתחלה, מאיץ) - לפי הבקשה. */
+@keyframes heroLettersGather {
+  from {
+    letter-spacing: .85em;
+    transform: scale(.78);
+  }
+  to {
+    letter-spacing: -2px;
+    transform: scale(1);
+  }
+}
+
+/* ריחוף עדין ומתמשך לכותרת, עם צל רך שמתחתיה שמתחזק כשהיא "עולה" - נותן תחושת הגבהה */
+@keyframes heroFloat {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 14px 22px rgba(7,5,20,.35));
+  }
+  50% {
+    transform: translateY(-9px);
+    filter: drop-shadow(0 26px 30px rgba(7,5,20,.45));
+  }
+}
+
+.hero-welcome-enter {
+  animation: heroFadeRise .7s cubic-bezier(.16,.84,.44,1) both;
+}
+
+.hero-title-enter {
+  animation: heroLettersGather 1.3s ease-in both;
+  transform-origin: center center;
+}
+
+.hero-title-float {
+  display: inline-block;
+  animation: heroFloat 5s ease-in-out 1.3s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-welcome-enter,
+  .hero-title-float,
+  .hero-title-enter {
+    animation: none;
+  }
+}
+
+/* כפתורי ה-CTA בהירו (וידאו): רקע/outline-color מוגדרים כאן (לא ב-style המוטבע ב-JSX)
+   כי inline style מנצח תמיד כלל מ-stylesheet חיצוני - אי אפשר לכתוב :hover על style מוטבע,
+   אז כל מה שצריך לזוז/להשתנות בהובר חייב לחיות כ-class. עלייה קלה (translateY+scale)
+   והדגשת-צבע (gold-soft בוהק יותר לכפתור הראשי, outline שמואר לזהב במשני). */
+.hero-cta-btn {
+  transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, outline-color .25s ease;
+}
+
+.hero-cta-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.hero-cta-primary {
+  background-color: rgba(201,162,39,.78);
+  outline-color: rgba(245,242,234,.75);
+  box-shadow: 0 10px 28px rgba(201,162,39,.45);
+}
+
+.hero-cta-primary:hover {
+  background-color: var(--color-gold-soft);
+  box-shadow: 0 16px 38px rgba(201,162,39,.7);
+}
+
+.hero-cta-secondary {
+  background-color: rgba(245,242,234,.16);
+  outline-color: rgba(245,242,234,.75);
+}
+
+.hero-cta-secondary:hover {
+  background-color: rgba(245,242,234,.3);
+  outline-color: var(--color-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta-btn,
+  .hero-cta-btn:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* באדג' "צרו קשר" העגול בפינה הימנית-תחתונה של הירו - אטום לחלוטין (לא שקוף) כדי שיכסה
+   במדויק את סימן ה-AI שמתחתיו ויראה כתג ברור; מתרחב קלות בהובר כדי לאותת שהוא לחיץ. */
+.hero-contact-badge {
+  opacity: 1;
+  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+}
+
+.hero-contact-badge:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 22px rgba(0,0,0,.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-contact-badge:hover {
+    transform: none;
+  }
+}
+
+/* קורסור מהבהב לאפקט מכונת-הכתיבה של הטקסט המשני בהירו */
+@keyframes heroCaretBlink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.hero-typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-inline-start: 2px;
+  background: currentColor;
+  vertical-align: -2px;
+  animation: heroCaretBlink .9s step-end infinite;
+}
+
 h1,
 h2,
 h3 {
   font-family: var(--font-heading);
   font-weight: 900;
-  color: var(--color-purple);
+  color: var(--color-navy);
   line-height: 1.15;
   letter-spacing: -0.5px;
 }
 
 a {
-  color: var(--color-terracotta);
+  color: var(--color-gold);
 }
 
 button {
@@ -56,6 +199,30 @@ button {
   display: none;
 }
 
+/* שלושת כרטיסי הדשבורד עוברים לשורה אחת זה-לצד-זה כשיש מקום בפועל - container query
+   (לא media query) כי הרוחב הזמין נקבע ע"י רוחב הדשבורד עצמו, לא ע"י ה-viewport */
+.hero-dashboard-shell {
+  container-type: inline-size;
+}
+
+.hero-dashboard-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@container (min-width: 760px) {
+  .hero-dashboard-row {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .hero-dashboard-row > * {
+    flex: 1 1 33.333%;
+    min-width: 0;
+  }
+}
+
 @media (min-width: 860px) {
   .desktop-nav {
     display: flex;
@@ -64,12 +231,30 @@ button {
   .mobile-menu-btn {
     display: none;
   }
+
+  /* ההירו (טקסט+דשבורד) ממורכז כיחידה אחת בתוך גובה ה-viewport הפנוי;
+     ה-JS ב-HeroSection מכווץ אותה (transform: scale) אם היא לא נכנסת. height (לא
+     min-height) + overflow:hidden כדי שהמדידה ב-JS תהיה יציבה ולא תושפע מהתוכן עצמו.
+     אם אפילו רצפת-הכיווץ לא מספיקה - hero-fit-overflow עוברת לגלילה חלקה במקום חיתוך. */
+  .hero-fit-outer {
+    height: calc(100vh - 84px);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-fit-outer.hero-fit-overflow {
+    height: auto;
+    min-height: calc(100vh - 84px);
+    overflow: visible;
+  }
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--color-terracotta);
+  border-color: var(--color-gold);
 }
 
 .spinner-ring {
@@ -77,7 +262,7 @@ textarea:focus {
   height: 2rem;
   border-radius: 50%;
   border: 3px solid var(--color-border);
-  border-top-color: var(--color-terracotta);
+  border-top-color: var(--color-gold);
   animation: spin 0.8s linear infinite;
 }
 
@@ -93,13 +278,13 @@ textarea:focus {
 
 .article-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(46, 31, 71, 0.14);
+  box-shadow: 0 16px 36px rgba(27, 47, 82,0.14);
 }
 
 .table-action-btn {
   background: transparent;
-  border: 1.5px solid rgba(46, 31, 71, 0.25);
-  color: var(--color-purple);
+  border: 1.5px solid rgba(27, 47, 82,0.25);
+  color: var(--color-navy);
   border-radius: var(--radius-pill);
   padding: 0.3rem 0.9rem;
   font-size: var(--text-sm);
@@ -108,8 +293,8 @@ textarea:focus {
 }
 
 .table-action-btn:hover {
-  border-color: var(--color-terracotta);
-  color: var(--color-terracotta);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 .table-action-btn--danger {
@@ -123,5 +308,5 @@ textarea:focus {
 }
 
 .admin-table-row:hover {
-  background: rgba(220, 231, 251, 0.35);
+  background: rgba(27, 47, 82, 0.06);
 }

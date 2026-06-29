@@ -51,7 +51,7 @@ export default function PaymentReturn() {
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '32px',
-              color: 'var(--color-purple)',
+              color: 'var(--color-navy)',
             }}
           >
             ✓

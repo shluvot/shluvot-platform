@@ -1,23 +1,25 @@
 import MonoLabel from '../../dummies/MonoLabel/MonoLabel';
 
 const BADGE_STYLES = [
-  { bg: 'var(--color-terracotta)', color: '#fff', shadow: 'rgba(196,78,46,.4)' },
-  { bg: 'var(--color-gold)', color: 'var(--color-purple)', shadow: 'rgba(201,154,69,.45)' },
-  { bg: 'var(--color-teal-deep)', color: '#fff', shadow: 'rgba(47,92,88,.4)' },
-  { bg: 'var(--color-sage)', color: '#fff', shadow: 'rgba(92,122,99,.4)' },
-  { bg: 'var(--color-terracotta)', color: '#fff', shadow: 'rgba(196,78,46,.4)' },
-  { bg: 'var(--color-gold)', color: 'var(--color-purple)', shadow: 'rgba(201,154,69,.45)' },
+  { bg: 'var(--color-navy)', color: '#fff', shadow: 'rgba(27,47,82,.4)' },
+  { bg: 'var(--color-gold)', color: 'var(--color-navy)', shadow: 'rgba(201,162,39,.45)' },
+  { bg: 'var(--color-navy)', color: '#fff', shadow: 'rgba(27,47,82,.4)' },
+  { bg: 'var(--color-gold)', color: 'var(--color-navy)', shadow: 'rgba(201,162,39,.45)' },
+  { bg: 'var(--color-navy)', color: '#fff', shadow: 'rgba(27,47,82,.4)' },
+  { bg: 'var(--color-gold)', color: 'var(--color-navy)', shadow: 'rgba(201,162,39,.45)' },
 ];
 
 export default function BenefitsGrid({ label, heading, items }) {
   if (!items?.length) return null;
 
   return (
-    <section id="benefits" style={{ background: 'var(--color-section-warm)', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    // position:sticky+z-index - חלק מסדרת ה"ערימה" העקבית של כל סקשני דף הנחיתה (ראו
+    // הסבר ב-HeroSection.jsx).
+    <section id="benefits" style={{ position: 'sticky', top: 0, zIndex: 3, background: 'var(--color-section-cool)', padding: 'clamp(64px,9vw,110px) 28px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(40px,5vw,60px)' }}>
-          <MonoLabel color="var(--color-terracotta)">{label}</MonoLabel>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(34px,5vw,52px)', lineHeight: 1.1, margin: 0, color: 'var(--color-purple)', letterSpacing: '-1px' }}>
+          <MonoLabel color="var(--color-gold)">{label}</MonoLabel>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(34px,5vw,52px)', lineHeight: 1.1, margin: 0, color: 'var(--color-navy)', letterSpacing: '-1px' }}>
             {heading}
           </h2>
         </div>
@@ -26,7 +28,7 @@ export default function BenefitsGrid({ label, heading, items }) {
           {items.map((item, index) => {
             const badge = BADGE_STYLES[index % BADGE_STYLES.length];
             return (
-              <div key={index} style={{ position: 'relative', background: 'var(--color-surface)', borderRadius: '16px', padding: '30px', boxShadow: '0 10px 30px rgba(36,26,46,.08)' }}>
+              <div key={index} style={{ position: 'relative', background: 'var(--color-surface)', borderRadius: '16px', padding: '30px', boxShadow: '0 10px 30px rgba(27,35,48,.08)' }}>
                 <div
                   style={{
                     position: 'absolute',
@@ -48,7 +50,7 @@ export default function BenefitsGrid({ label, heading, items }) {
                 >
                   {index + 1}
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '23px', margin: '8px 0 10px', color: 'var(--color-purple)' }}>{item.title}</h3>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '23px', margin: '8px 0 10px', color: 'var(--color-navy)' }}>{item.title}</h3>
                 <p style={{ fontSize: '16px', lineHeight: 1.65, color: 'var(--color-text-muted)', margin: 0 }}>{item.body}</p>
               </div>
             );

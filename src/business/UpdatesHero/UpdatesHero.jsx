@@ -2,7 +2,7 @@ import MonoLabel from '../../dummies/MonoLabel/MonoLabel';
 
 export default function UpdatesHero({ eyebrow, title, subtitle }) {
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', background: 'var(--color-section-warm)', paddingBlock: 'clamp(56px,8vw,90px)' }}>
+    <section style={{ position: 'relative', overflow: 'hidden', background: 'var(--color-section-cool)', paddingBlock: 'clamp(56px,8vw,90px)' }}>
       <div
         aria-hidden="true"
         style={{
@@ -12,13 +12,13 @@ export default function UpdatesHero({ eyebrow, title, subtitle }) {
           width: '180px',
           height: '180px',
           borderRadius: '50%',
-          background: 'var(--color-terracotta)',
+          background: 'var(--color-gold)',
           opacity: 0.12,
         }}
       />
 
       <div style={{ position: 'relative', maxWidth: '1100px', margin: '0 auto', paddingInline: '28px' }}>
-        <MonoLabel color="var(--color-terracotta)">{eyebrow}</MonoLabel>
+        <MonoLabel color="var(--color-gold)">{eyebrow}</MonoLabel>
         <h1
           style={{
             fontFamily: 'var(--font-heading)',
@@ -26,13 +26,13 @@ export default function UpdatesHero({ eyebrow, title, subtitle }) {
             fontSize: 'clamp(36px,6vw,58px)',
             letterSpacing: '-1px',
             margin: 0,
-            color: 'var(--color-purple)',
+            color: 'var(--color-navy)',
           }}
         >
           {title}
         </h1>
 
-        <div style={{ height: '2px', background: 'rgba(46,31,71,.2)', margin: '22px 0 18px' }} />
+        <div style={{ height: '2px', background: 'rgba(27,47,82,.2)', margin: '22px 0 18px' }} />
 
         {subtitle && (
           <p style={{ fontSize: 'var(--text-lg)', color: 'var(--color-text-muted)', maxWidth: '36rem', margin: 0 }}>{subtitle}</p>

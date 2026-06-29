@@ -1,5 +1,136 @@
 // איורי SVG סטטיים לקרוסלת ה-hero - עיצוב דקורטיבי, לא תוכן ניהולי (אין סיבה שצוות יערוך וקטור גרפי).
+//
+// HERO_FRAMES_LEGACY: הסט המקורי (דמויות מצוירות) - הלקוח חש שזה "ילדותי" ולא משדר
+// ביטחון/עוצמה למטפלות. נשמר כאן בכוונה (לא נמחק) למקרה שנרצה לחזור אליו בעתיד.
+// HERO_FRAMES: הסט הפעיל הנוכחי - לא איורים שטוחים/"מצוירים" אלא טקסטורת רקע כהה
+// (גרדיאנט + גרין דק) עם איקון קו-דק זהב צף עליה, בסגנון "פוטוגרפי/פרימיום" קרוב
+// יותר לצילום עמום מאשר לציור, על בסיס המשמעות של הכיתוב (caption) שמשויך לכל פריים.
+// פריים 4 חוזר בכוונה על פריים 0 (אותו caption בדיוק) - כדי שאיפוס הלופ בקרוסלה ייראה רציף.
+const panelShell = (icon) => (
+  <>
+    <defs>
+      <radialGradient id="navyGlow" cx="50%" cy="40%" r="65%">
+        <stop offset="0%" stopColor="#1B2F52" />
+        <stop offset="55%" stopColor="#0F1B33" />
+        <stop offset="100%" stopColor="#070D1A" />
+      </radialGradient>
+      <filter id="grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise" />
+        <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0" />
+      </filter>
+    </defs>
+    <rect width="348" height="454" fill="url(#navyGlow)" />
+    <rect width="348" height="454" filter="url(#grain)" />
+    <circle cx="174" cy="234" r="120" fill="#C9A227" opacity="0.07" />
+    <circle cx="62" cy="64" r="2.5" fill="#C9A227" opacity="0.5" />
+    <circle cx="104" cy="44" r="1.8" fill="#C9A227" opacity="0.4" />
+    <circle cx="298" cy="80" r="2" fill="#C9A227" opacity="0.45" />
+    <circle cx="280" cy="384" r="1.8" fill="#C9A227" opacity="0.35" />
+    <circle cx="50" cy="394" r="2" fill="#C9A227" opacity="0.4" />
+
+    {icon}
+  </>
+);
+
+const photoFrame = (src, alt) => (
+  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+    <div
+      aria-hidden="true"
+      style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'linear-gradient(180deg, rgba(15,27,51,.1) 0%, rgba(15,27,51,.65) 100%)',
+      }}
+    />
+  </div>
+);
+
+// לא בשימוש כרגע (פריימים 0/4 הוחלפו לתמונת guideyou.png האמיתית) - נשמר למקרה שנרצה לחזור לאיקון.
+export const compassIcon = (
+  <g key="compass" fill="none" stroke="#C9A227" strokeWidth="2">
+    <circle cx="174" cy="234" r="86" strokeOpacity="0.7" />
+    <g strokeWidth="2.5" strokeLinecap="round">
+      <line x1="174" y1="130" x2="174" y2="150" />
+      <line x1="174" y1="318" x2="174" y2="338" />
+      <line x1="62" y1="234" x2="82" y2="234" />
+      <line x1="266" y1="234" x2="286" y2="234" />
+    </g>
+    <polygon points="174,178 188,234 174,222 160,234" fill="#C9A227" stroke="none" />
+    <polygon points="174,290 188,234 174,246 160,234" fill="none" stroke="#C9A227" strokeWidth="2" />
+    <circle cx="174" cy="234" r="5" fill="#C9A227" stroke="none" />
+  </g>
+);
+
+// לא בשימוש כרגע (פריים 1 הוחלף לתמונת allcountry.png האמיתית) - נשמר למקרה שנרצה לחזור לאיקון.
+export const linkedRingsIcon = (
+  <g key="rings" fill="none" stroke="#C9A227" strokeWidth="3">
+    <circle cx="134" cy="234" r="46" />
+    <circle cx="174" cy="234" r="46" />
+    <circle cx="214" cy="234" r="46" />
+  </g>
+);
+
+// לא בשימוש כרגע (פריים 2 הוחלף לתמונת learn.png האמיתית) - נשמר למקרה שנרצה לחזור לאיקון.
+export const openBookIcon = (
+  <g key="book">
+    <g fill="none" stroke="#C9A227" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
+      <path d="M174 190 L174 288" />
+      <path d="M174 190 Q108 174 84 194 L84 276 Q108 258 174 274" />
+      <path d="M174 190 Q240 174 264 194 L264 276 Q240 258 174 274" />
+    </g>
+    <g stroke="#C9A227" strokeWidth="1.5" strokeOpacity="0.65" strokeLinecap="round">
+      <line x1="102" y1="216" x2="152" y2="223" />
+      <line x1="102" y1="236" x2="152" y2="241" />
+      <line x1="102" y1="256" x2="152" y2="259" />
+      <line x1="196" y1="223" x2="246" y2="216" />
+      <line x1="196" y1="241" x2="246" y2="236" />
+      <line x1="196" y1="259" x2="246" y2="256" />
+    </g>
+  </g>
+);
+
+const institutionIcon = (
+  <g key="institution" fill="none" stroke="#C9A227">
+    <polyline points="120,210 174,172 228,210" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    <line x1="108" y1="210" x2="240" y2="210" strokeWidth="2" />
+    <g strokeWidth="2.5" strokeLinecap="round">
+      <line x1="130" y1="220" x2="130" y2="290" />
+      <line x1="156" y1="220" x2="156" y2="290" />
+      <line x1="192" y1="220" x2="192" y2="290" />
+      <line x1="218" y1="220" x2="218" y2="290" />
+    </g>
+    <line x1="108" y1="298" x2="240" y2="298" strokeWidth="2.5" strokeLinecap="round" />
+  </g>
+);
+
 export const HERO_FRAMES = [
+  <div key="0" style={{ width: '100%', height: '100%' }}>
+    {photoFrame('/guideyou.png', 'ליווי חם לכל אורך הדרך')}
+  </div>,
+  <div key="1" style={{ width: '100%', height: '100%' }}>
+    {photoFrame('/allcountry.png', 'קהילה ארצית של מטפלות, מחוברות זו לזו בכל הארץ')}
+  </div>,
+  <div key="2" style={{ width: '100%', height: '100%' }}>
+    {photoFrame('/learn.png', 'הכשרות וכלים פדגוגיים')}
+  </div>,
+  <svg key="3" viewBox="0 0 348 454" preserveAspectRatio="xMidYMid slice" style={{ width: '100%', height: '100%', display: 'block' }}>
+    {panelShell(institutionIcon)}
+  </svg>,
+  <div key="4" style={{ width: '100%', height: '100%' }}>
+    {photoFrame('/guideyou.png', 'ליווי חם לכל אורך הדרך')}
+  </div>,
+];
+
+export const HERO_CAPTIONS = [
+  'ליווי חם לכל אורך הדרך',
+  'קהילה ארצית של מטפלות',
+  'הכשרות וכלים פדגוגיים',
+  'הבית המקצועי שלכן',
+  'ליווי חם לכל אורך הדרך',
+];
+
+export const HERO_FRAMES_LEGACY = [
   <svg key="0" viewBox="0 0 348 454" preserveAspectRatio="xMidYMid slice" style={{ width: '100%', height: '100%', display: 'block' }}>
     <rect width="348" height="454" fill="#BFE0F2" />
     <circle cx="290" cy="82" r="33" fill="#E9A93C" />
@@ -117,12 +248,4 @@ export const HERO_FRAMES = [
     <circle cx="242" cy="344" r="2.2" fill="#3A2E26" />
     <circle cx="255" cy="344" r="2.2" fill="#3A2E26" />
   </svg>,
-];
-
-export const HERO_CAPTIONS = [
-  'ליווי חם לכל אורך הדרך',
-  'קהילה ארצית של מטפלות',
-  'הכשרות וכלים פדגוגיים',
-  'הבית המקצועי שלכן',
-  'ליווי חם לכל אורך הדרך',
 ];

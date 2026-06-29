@@ -53,9 +53,9 @@ export default function IllustrationCarousel({ frames, captions }) {
           height: 'clamp(418px, 42vw, 564px)',
           borderRadius: '228px 228px 24px 24px',
           overflow: 'hidden',
-          boxShadow: '0 30px 70px rgba(46,31,71,.25)',
-          background: '#BFE0F2',
-          border: '5px solid #FFFFFF',
+          boxShadow: '0 30px 70px rgba(31,21,48,.45)',
+          background: 'var(--color-navy-light)',
+          border: '4px solid var(--color-gold)',
         }}
       >
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', direction: 'ltr' }}>
@@ -77,7 +77,7 @@ export default function IllustrationCarousel({ frames, captions }) {
           width: 'clamp(300px, 26vw, 392px)',
           height: '58px',
           overflow: 'hidden',
-          background: 'var(--color-terracotta)',
+          background: 'var(--color-gold)',
           borderRadius: '999px',
           boxShadow: '0 16px 38px rgba(0,0,0,.34)',
           direction: 'ltr',

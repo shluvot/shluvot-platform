@@ -53,16 +53,20 @@ export default function Landing() {
 
       <AboutSection label={about.label} heading={about.heading} body={about.body} />
 
-      <StatsStrip items={stats} />
-
-      <BenefitsGrid label={benefits.label} heading={benefits.heading} items={benefits.items} />
-
+      {/* הבלוג/עדכונים הוזז לבוא ישר אחרי "אודות" (לפי בקשה מפורשת). הוחלף גם סדר
+          Benefits/Stats (לעומת קודם) כדי לשמר רקעים-לסירוגין בלי שני סקשנים כהים ברצף -
+          Updates כהה (navy) ו-Stats גם כהה (navy-deep, עם טקסט בהיר קשיח שלא ניתן לשנות
+          לרקע בהיר), אז אם Stats היה בא ישר אחרי Updates היו שני סקשנים כהים צמודים. */}
       <UpdatesPreviewSection
         label={updatesPreview.label}
         heading={updatesPreview.heading}
         ctaLabel={updatesPreview.ctaLabel}
         articles={latestArticles}
       />
+
+      <BenefitsGrid label={benefits.label} heading={benefits.heading} items={benefits.items} />
+
+      <StatsStrip items={stats} />
 
       <ContactSection
         label={contact.label}

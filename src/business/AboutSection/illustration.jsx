@@ -1,19 +1,28 @@
 export default function AboutIllustration() {
   return (
     <svg viewBox="0 0 420 420" preserveAspectRatio="xMidYMid slice" style={{ width: '100%', height: '100%', display: 'block' }}>
-      <rect width="420" height="420" fill="#E7DFF1" />
-      <circle cx="342" cy="78" r="40" fill="#E9A93C" />
-      <rect x="0" y="322" width="420" height="98" fill="#C2D3C4" />
-      <rect x="70" y="250" width="14" height="80" rx="6" fill="#8a6a4a" />
-      <circle cx="77" cy="238" r="44" fill="#3F8F6E" />
-      <polygon points="118,188 220,102 322,188" fill="#E86A4E" />
-      <rect x="138" y="188" width="164" height="150" rx="9" fill="#FFFDF8" />
-      <rect x="200" y="252" width="48" height="86" rx="6" fill="#E9A93C" />
-      <circle cx="170" cy="228" r="18" fill="#3A2A5E" />
-      <circle cx="120" cy="300" r="16" fill="#F1D9C2" />
-      <path d="M100 360 Q100 318 120 316 Q140 318 140 360 Z" fill="#D2613F" />
-      <circle cx="300" cy="306" r="14" fill="#F1D9C2" />
-      <path d="M283 360 Q283 324 300 322 Q317 324 317 360 Z" fill="#3A2A5E" />
+      <defs>
+        <radialGradient id="aboutNavyGlow" cx="50%" cy="40%" r="65%">
+          <stop offset="0%" stopColor="#1B2F52" />
+          <stop offset="55%" stopColor="#0F1B33" />
+          <stop offset="100%" stopColor="#070D1A" />
+        </radialGradient>
+        <filter id="aboutGrain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise" />
+          <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0" />
+        </filter>
+      </defs>
+      <rect width="420" height="420" fill="url(#aboutNavyGlow)" />
+      <rect width="420" height="420" filter="url(#aboutGrain)" />
+      <circle cx="210" cy="210" r="140" fill="#C9A227" opacity="0.07" />
+
+      <g fill="none" stroke="#C9A227" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="138,206 210,140 282,206" />
+        <rect x="156" y="206" width="108" height="100" />
+        <line x1="210" y1="240" x2="210" y2="306" />
+        <line x1="186" y1="266" x2="186" y2="284" />
+      </g>
+      <circle cx="210" cy="140" r="5" fill="#C9A227" stroke="none" />
     </svg>
   );
 }

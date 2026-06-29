@@ -32,7 +32,7 @@ export default function AppLayout() {
           }}
         >
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'var(--text-lg)', color: 'var(--color-purple)' }}>
+            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'var(--text-lg)', color: 'var(--color-navy)' }}>
               שלובות
             </span>
           </Link>
@@ -49,7 +49,7 @@ export default function AppLayout() {
             <Link
               to="/registration"
               style={{
-                background: 'var(--color-terracotta)',
+                background: 'var(--color-gold)',
                 color: '#fff',
                 textDecoration: 'none',
                 fontWeight: 700,
@@ -70,7 +70,7 @@ export default function AppLayout() {
                 border: 'none',
                 fontSize: '1.5rem',
                 cursor: 'pointer',
-                color: 'var(--color-purple)',
+                color: 'var(--color-navy)',
                 lineHeight: 1,
               }}
             >

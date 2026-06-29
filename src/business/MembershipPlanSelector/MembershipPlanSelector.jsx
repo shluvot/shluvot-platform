@@ -6,7 +6,7 @@ const PLANS = [
 export default function MembershipPlanSelector({ billingCycle, onSelectCycle }) {
   return (
     <fieldset style={{ border: 'none', padding: 0, margin: '0 0 var(--space-3)' }}>
-      <legend style={{ marginBottom: '0.6rem', fontWeight: 700, color: 'var(--color-purple)' }}>מחזור תשלום</legend>
+      <legend style={{ marginBottom: '0.6rem', fontWeight: 700, color: 'var(--color-navy)' }}>מחזור תשלום</legend>
       <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
         {PLANS.map((plan) => {
           const isSelected = billingCycle === plan.billingCycle;
@@ -19,13 +19,13 @@ export default function MembershipPlanSelector({ billingCycle, onSelectCycle }) 
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.5rem',
-                background: isSelected ? 'rgba(255,140,105,.1)' : 'var(--color-surface)',
-                border: `2px solid ${isSelected ? 'var(--color-terracotta)' : 'var(--color-border)'}`,
+                background: isSelected ? 'rgba(201,162,39,.1)' : 'var(--color-surface)',
+                border: `2px solid ${isSelected ? 'var(--color-gold)' : 'var(--color-border)'}`,
                 borderRadius: '14px',
                 padding: '0.9rem 1rem',
                 cursor: 'pointer',
                 fontWeight: 700,
-                color: isSelected ? 'var(--color-terracotta)' : 'var(--color-text)',
+                color: isSelected ? 'var(--color-gold)' : 'var(--color-text)',
               }}
             >
               <input
@@ -34,7 +34,7 @@ export default function MembershipPlanSelector({ billingCycle, onSelectCycle }) 
                 value={plan.billingCycle}
                 checked={isSelected}
                 onChange={() => onSelectCycle(plan.billingCycle)}
-                style={{ accentColor: 'var(--color-terracotta)' }}
+                style={{ accentColor: 'var(--color-gold)' }}
               />
               {plan.label}
             </label>

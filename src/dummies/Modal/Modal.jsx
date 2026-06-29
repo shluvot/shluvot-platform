@@ -6,7 +6,7 @@ export default function Modal({ isOpen, title, children, onClose }) {
       style={{
         position: 'fixed',
         inset: 0,
-        background: 'rgba(46,31,71,0.45)',
+        background: 'rgba(27,47,82,0.45)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -25,7 +25,7 @@ export default function Modal({ isOpen, title, children, onClose }) {
           width: '100%',
           maxHeight: '90vh',
           overflowY: 'auto',
-          boxShadow: '0 24px 60px rgba(46,31,71,.3)',
+          boxShadow: '0 24px 60px rgba(27,47,82,.3)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -36,7 +36,7 @@ export default function Modal({ isOpen, title, children, onClose }) {
               marginBottom: 'var(--space-3)',
               fontFamily: 'var(--font-heading)',
               fontWeight: 900,
-              color: 'var(--color-purple)',
+              color: 'var(--color-navy)',
             }}
           >
             {title}

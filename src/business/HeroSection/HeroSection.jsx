@@ -1,6 +1,6 @@
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import IllustrationCarousel from '../IllustrationCarousel/IllustrationCarousel';
-import { HERO_FRAMES, HERO_CAPTIONS } from './illustrations';
+import { MessageCircle } from 'lucide-react';
 
 const NAV_LINKS = [
   { href: '#about', label: 'אודות' },
@@ -9,230 +9,287 @@ const NAV_LINKS = [
   { href: '#contact', label: 'צרו קשר' },
 ];
 
-const BADGE_DOT_COLORS = ['var(--color-gold)', 'var(--color-terracotta)', 'var(--color-sage)'];
+// קצב נגינה: פי 2.2 למשך רוב הסרטון, ולקראת הסוף (האחוז האחרון מהמשך הכולל) מאט בעדינות
+// (ease-out) לקראת עצירה - לא קפיצה חדה. אחוז (לא שניות קבועות) כדי שזה יעבוד נכון
+// בלי תלות באורך המדויק של הקובץ.
+const BASE_PLAYBACK_RATE = 2.2;
+const MIN_PLAYBACK_RATE = 0.15;
+const SLOWDOWN_FRACTION = 0.22;
+// כפתורי ה-CTA מתגלים בפייד רגע לפני שהסרטון נגמר (לא רק כש-ended קורה) - שניות קבועות
+// (לא אחוז) כי "רגע לפני הסוף" הוא משך קצר ואבסולוטי, לא יחסי לאורך הסרטון.
+const CTA_REVEAL_BEFORE_END_SECONDS = 1.3;
 
-export default function HeroSection({ eyebrow, title, subtitle, ctaLabel, secondaryCtaLabel, badges }) {
+function easeOutCubic(t) {
+  return 1 - (1 - t) ** 3;
+}
+
+// בסיס משותף לשני כפתורי ה-CTA - מבטיח שהם *בדיוק* באותו גודל (לא קירוב ויזואלי) כי שני
+// הכפתורים חולקים את כל מאפייני המידות/המסגרת, ונבדלים רק במילוי (gold מלא לעומת שקוף-בהיר,
+// מוגדר ב-global.css כ-.hero-cta-primary/.hero-cta-secondary - לא כאן). outline+outlineOffset
+// (לא border) כי outline לא צמוד לקופסה - יוצר פער אמיתי שבו רואים את הסרטון בין הכפתור
+// למסגרת. backdrop-filter על שני הכפתורים כדי שהם "יקלטו" את צבעי הסרטון מתחתם.
+// outlineColor (לא outline shorthand!) נשאר כאן רק כברירת מחדל - outlineWidth/Style/Offset
+// בלבד צריכים להיות קבועים; outlineColor חייב להיות מוגדר ב-CSS (לא inline) כדי ש-:hover
+// יוכל לשנות אותו בלי שה-inline style ינצח אותו (inline מנצח כל stylesheet חיצוני).
+const CTA_BUTTON_BASE = {
+  textDecoration: 'none',
+  fontSize: '16px',
+  padding: '14px 32px',
+  borderRadius: '999px',
+  whiteSpace: 'nowrap',
+  outlineWidth: '1.5px',
+  outlineStyle: 'solid',
+  outlineOffset: '5px',
+  backdropFilter: 'blur(10px) saturate(160%)',
+  WebkitBackdropFilter: 'blur(10px) saturate(160%)',
+};
+
+// לופ requestAnimationFrame אחד (לא timeupdate, שמתעדכן רק כמה פעמים בשניה ונראה "מדורג")
+// שגם מאט את video.playbackRate בעדינות לקראת הסוף וגם מסמן מתי לגלות את כפתורי ה-CTA -
+// שני אפקטים שתלויים באותו ציר זמן (currentTime/duration), אז עדיף לופ משותף אחד.
+function useVideoTimeline(videoRef, isReady) {
+  const [showCtas, setShowCtas] = useState(false);
+
+  useEffect(() => {
+    if (!isReady) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.playbackRate = BASE_PLAYBACK_RATE;
+
+    let rafId;
+    function tick() {
+      const { currentTime, duration } = video;
+      if (Number.isFinite(duration) && duration > 0) {
+        const remaining = duration - currentTime;
+
+        const windowSeconds = duration * SLOWDOWN_FRACTION;
+        if (remaining <= windowSeconds) {
+          const t = Math.min(1, Math.max(0, 1 - remaining / windowSeconds));
+          const eased = easeOutCubic(t);
+          video.playbackRate = Math.max(
+            MIN_PLAYBACK_RATE,
+            BASE_PLAYBACK_RATE - (BASE_PLAYBACK_RATE - MIN_PLAYBACK_RATE) * eased
+          );
+        } else {
+          video.playbackRate = BASE_PLAYBACK_RATE;
+        }
+
+        if (remaining <= CTA_REVEAL_BEFORE_END_SECONDS) {
+          setShowCtas(true);
+        }
+      }
+      if (!video.ended && !video.paused) {
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [videoRef, isReady]);
+
+  return showCtas;
+}
+
+// וידאו ההירו: לא autoplay רגיל - מחכים ל-canplaythrough (או ל-error, כדי לא להיתקע
+// לנצח אם הקובץ נכשל) ורק אז קוראים ל-play() בעצמנו, כדי שההפעלה תתאם בדיוק לרגע שבו
+// מסך-הטעינה נעלם. muted+playsInline נדרשים כדי שדפדפנים (בעיקר Safari/iOS) יאפשרו
+// autoplay כלל. אין loop - הסרטון רץ פעם אחת ונשאר על הפריים האחרון.
+function useVideoReady(videoRef) {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.readyState >= 3) {
+      setIsReady(true);
+      return;
+    }
+
+    function handleReady() {
+      setIsReady(true);
+    }
+    video.addEventListener('canplaythrough', handleReady);
+    video.addEventListener('error', handleReady);
+    return () => {
+      video.removeEventListener('canplaythrough', handleReady);
+      video.removeEventListener('error', handleReady);
+    };
+  }, [videoRef]);
+
+  useEffect(() => {
+    if (isReady) {
+      videoRef.current?.play().catch(() => {});
+    }
+  }, [isReady, videoRef]);
+
+  useEffect(() => {
+    document.body.style.overflow = isReady ? '' : 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isReady]);
+
+  return isReady;
+}
+
+export default function HeroSection() {
+  const videoRef = useRef(null);
+  const isReady = useVideoReady(videoRef);
+  const showCtas = useVideoTimeline(videoRef, isReady);
+
   return (
-    <section
-      style={{
-        position: 'relative',
-        background: 'var(--color-purple-dark)',
-        color: 'var(--color-cream-text)',
-        overflow: 'hidden',
-        padding: '0 0 64px',
-      }}
-    >
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: 'clamp(160px,26vw,340px)',
-          height: 'clamp(150px,24vw,300px)',
-          background: 'var(--color-gold)',
-          clipPath: 'polygon(0 0,100% 0,0 100%)',
-          opacity: 0.18,
-          zIndex: 0,
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          bottom: '-60px',
-          right: '-50px',
-          width: 'clamp(220px,30vw,420px)',
-          height: 'clamp(140px,18vw,240px)',
-          background: 'var(--color-terracotta)',
-          transform: 'rotate(-9deg)',
-          borderRadius: '14px',
-          opacity: 0.22,
-          zIndex: 0,
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: '38%',
-          right: '8%',
-          width: '120px',
-          height: '120px',
-          border: '2px solid rgba(247,241,232,.15)',
-          borderRadius: '50%',
-          zIndex: 0,
-        }}
-      />
-
-      <header
-        style={{
-          position: 'relative',
-          zIndex: 5,
-          maxWidth: '1180px',
-          margin: '0 auto',
-          padding: '26px 28px 0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '24px',
-        }}
-      >
-        <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '24px', letterSpacing: '-.5px', color: 'var(--color-cream-text)' }}>
-          שלובות
+    <>
+      {!isReady && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            background: '#0d0f24',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div className="spinner-ring" />
         </div>
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '26px', rowGap: '10px', justifyContent: 'flex-end' }}>
-          {NAV_LINKS.map((link) => {
-            const linkStyle = { color: 'var(--color-cream-text)', textDecoration: 'none', fontWeight: 600, fontSize: '15px', opacity: 0.85, whiteSpace: 'nowrap' };
-            return link.to ? (
-              <Link key={link.to} to={link.to} style={linkStyle}>
-                {link.label}
-              </Link>
-            ) : (
-              <a key={link.href} href={link.href} style={linkStyle}>
-                {link.label}
-              </a>
-            );
-          })}
+      )}
+
+      {/* position:sticky (לא fixed+ספייסר נפרד) - זה התבנית האחידה שכל הסקשנים בעמוד
+          משתמשים בה: כל סקשן "נדבק" לראש המסך כשמגיעים אליו, ונשאר תקוע במקום עד שגובהו
+          המלא נגלל, ורק אז משתחרר - בדיוק באותו זמן שהסקשן הבא (שכבר היה נדבק מתחתיו)
+          מתחיל לעלות ולכסות אותו. position:sticky שומר את המקום בזרימה הרגילה (לא צריך
+          ספייסר נפרד כמו ב-fixed), ולכן כל הסקשנים יכולים להשתמש בו בעקביות, כל אחד עם
+          z-index הולך ועולה לפי סדר ה-DOM - כדי שיתערמו זה על זה בכיוון הנכון. בלי
+          z-index מפורש על *כל* הסקשנים, אלמנטים סטטיים (בלי position) תמיד מצוירים
+          *מתחת* לאלמנטים ממוקמים (positioned) - בלי קשר לסדר ה-DOM ביניהם - וזו הייתה
+          הבאגה שגרמה להירו "להיחשף" שוב מתחת לסקשנים שעדיין לא קיבלו position+z-index. */}
+      <section style={{ position: 'sticky', top: 0, zIndex: 0, height: '100vh', overflow: 'hidden', background: '#0d0f24' }}>
+        <video
+          ref={videoRef}
+          src="/video.mp4"
+          muted
+          playsInline
+          preload="auto"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+
+        {/* באדג' עגול - היה לוגו משרד התמ"ת (כיסוי דקורטיבי בלבד לסימן ה-AI שהסרטון
+            נוצר בו), הוחלף לכפתור "צרו קשר" פעיל (עוגן ל-#contact) כיוון שעדיף שהמקום
+            הזה יהיה שימושי ולא רק קוסמטי - עדיין מכסה את אותו סימן AI כתופעת-לוואי, כי
+            המיקום/גודל נשארו זהים. אחוזים (לא px קבועים!) - מדדנו את מיקום הסימן במדויק
+            ברשת-פיקסלים ב-viewport ידוע (1440x900: מרכז הסימן ב-(1363,750), כלומר 5.35%
+            מהקצה הימני, 16.67% מהתחתון), והמרנו לאחוזים כדי שהמיקום היחסי יישאר נכון בכל
+            גודל/זום של חלון הדפדפן. הגודל (5vw, לא %) כדי שהעיגול יישאר עיגול אמיתי. */}
+        <a
+          href="#contact"
+          aria-label="צרו קשר"
+          className="hero-contact-badge"
+          style={{
+            position: 'absolute',
+            right: '6.9%',
+            bottom: '12.7%',
+            width: 'clamp(56px, 5vw, 90px)',
+            height: 'clamp(56px, 5vw, 90px)',
+            borderRadius: '50%',
+            zIndex: 3,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'var(--color-gold)',
+            border: '2px solid rgba(255,255,255,.92)',
+            textDecoration: 'none',
+            color: '#fff',
+          }}
+        >
+          <MessageCircle size="46%" strokeWidth={2} />
+        </a>
+
+        {/* ממוקם קצת מתחת למרכז (top:58%, לא 50%) כדי לשבת מתחת לטקסט השלט שמופיע על
+            הסרטון, ולא לחפוף אותו. מתגלה בפייד (לא מופיע ישר) ממש לפני שהסרטון נגמר. */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '58%',
+            left: '50%',
+            zIndex: 4,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '40px',
+            opacity: showCtas ? 1 : 0,
+            transform: showCtas ? 'translate(-50%, -50%)' : 'translate(-50%, -40%)',
+            transition: 'opacity 1s ease, transform 1s ease',
+            pointerEvents: showCtas ? 'auto' : 'none',
+          }}
+        >
           <Link
             to="/registration"
-            style={{
-              background: 'var(--color-terracotta)',
-              color: '#fff',
-              textDecoration: 'none',
-              fontWeight: 700,
-              fontSize: '15px',
-              padding: '9px 20px',
-              borderRadius: '999px',
-              boxShadow: '0 6px 18px rgba(196,78,46,.4)',
-            }}
+            className="hero-cta-btn hero-cta-primary"
+            style={{ ...CTA_BUTTON_BASE, color: '#fff', fontWeight: 800 }}
           >
-            הצטרפו
+            הצטרפו לאיגוד
           </Link>
-        </nav>
-      </header>
-
-      <div style={{ position: 'relative', zIndex: 2, maxWidth: '1180px', margin: '0 auto', padding: '38px 28px 0' }}>
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 'clamp(32px,5vw,72px)' }}>
-          <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <IllustrationCarousel frames={HERO_FRAMES} captions={HERO_CAPTIONS} />
-          </div>
-
-          <div style={{ flex: '1 1 360px', minWidth: '300px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'right' }}>
-            <h1
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 900,
-                fontSize: 'clamp(56px,9vw,132px)',
-                lineHeight: 0.86,
-                letterSpacing: '-2px',
-                margin: 0,
-                color: 'var(--color-cream-text)',
-              }}
-            >
-              {title}
-            </h1>
-
-            <div
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontWeight: 700,
-                fontSize: '16px',
-                letterSpacing: '2px',
-                color: 'var(--color-gold)',
-                marginTop: '4px',
-                paddingRight: '5px',
-              }}
-            >
-              {eyebrow}
-            </div>
-
-            {subtitle && (
-              <p
-                style={{
-                  maxWidth: '540px',
-                  margin: '26px 0 0',
-                  fontSize: 'clamp(17px,1.6vw,20px)',
-                  lineHeight: 1.65,
-                  color: 'rgba(247,241,232,.75)',
-                  textAlign: 'right',
-                }}
-              >
-                {subtitle}
-              </p>
-            )}
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', justifyContent: 'flex-start', marginTop: '30px' }}>
-              {ctaLabel && (
-                <Link
-                  to="/registration"
-                  style={{
-                    background: 'var(--color-terracotta)',
-                    color: '#fff',
-                    textDecoration: 'none',
-                    fontWeight: 800,
-                    fontSize: '17px',
-                    padding: '15px 34px',
-                    borderRadius: '12px',
-                    boxShadow: '0 14px 30px rgba(196,78,46,.45)',
-                  }}
-                >
-                  {ctaLabel}
-                </Link>
-              )}
-              {secondaryCtaLabel && (
-                <a
-                  href="#about"
-                  style={{
-                    background: 'transparent',
-                    color: 'var(--color-cream-text)',
-                    textDecoration: 'none',
-                    fontWeight: 700,
-                    fontSize: '17px',
-                    padding: '15px 30px',
-                    borderRadius: '12px',
-                    border: '1.5px solid rgba(247,241,232,.35)',
-                  }}
-                >
-                  {secondaryCtaLabel}
-                </a>
-              )}
-            </div>
-
-            {badges?.length > 0 && (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'flex-start', marginTop: '34px' }}>
-                {badges.map((badge, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      background: 'rgba(247,241,232,.1)',
-                      border: '1px solid rgba(247,241,232,.22)',
-                      color: 'var(--color-cream-text)',
-                      fontWeight: 600,
-                      fontSize: '14px',
-                      padding: '9px 18px',
-                      borderRadius: '999px',
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: '7px',
-                        height: '7px',
-                        borderRadius: '50%',
-                        background: BADGE_DOT_COLORS[i % BADGE_DOT_COLORS.length],
-                      }}
-                    />
-                    {badge}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
+          <a
+            href="#about"
+            className="hero-cta-btn hero-cta-secondary"
+            style={{ ...CTA_BUTTON_BASE, color: 'var(--color-cream-text)', fontWeight: 700 }}
+          >
+            מי אנחנו
+          </a>
         </div>
-      </div>
-    </section>
+
+        <header
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 5,
+            maxWidth: '1180px',
+            margin: '0 auto',
+            padding: '26px 28px 0',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '24px',
+          }}
+        >
+          <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '24px', letterSpacing: '-.5px', color: 'var(--color-cream-text)' }}>
+            שלובות
+          </div>
+          <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '26px', rowGap: '10px', justifyContent: 'flex-end' }}>
+            {NAV_LINKS.map((link) => {
+              const linkStyle = { color: 'var(--color-cream-text)', textDecoration: 'none', fontWeight: 600, fontSize: '15px', opacity: 0.85, whiteSpace: 'nowrap' };
+              return link.to ? (
+                <Link key={link.to} to={link.to} style={linkStyle}>
+                  {link.label}
+                </Link>
+              ) : (
+                <a key={link.href} href={link.href} style={linkStyle}>
+                  {link.label}
+                </a>
+              );
+            })}
+            <Link
+              to="/registration"
+              style={{
+                background: 'var(--color-gold)',
+                color: '#fff',
+                textDecoration: 'none',
+                fontWeight: 800,
+                fontSize: '16px',
+                padding: '12px 28px',
+                borderRadius: '999px',
+                boxShadow: '0 8px 24px rgba(201,162,39,.55)',
+              }}
+            >
+              הצטרפו לאיגוד
+            </Link>
+          </nav>
+        </header>
+      </section>
+    </>
   );
 }

@@ -5,7 +5,7 @@ export default function PageHeader({ eyebrow, title, subtitle }) {
     <header style={{ marginBlock: 'var(--space-5)', textAlign: 'center' }}>
       {eyebrow && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <MonoLabel color="var(--color-terracotta)">{eyebrow}</MonoLabel>
+          <MonoLabel color="var(--color-gold)">{eyebrow}</MonoLabel>
         </div>
       )}
       <h1
@@ -14,7 +14,7 @@ export default function PageHeader({ eyebrow, title, subtitle }) {
           fontWeight: 900,
           fontSize: 'clamp(28px, 4vw, 42px)',
           letterSpacing: '-0.5px',
-          color: 'var(--color-purple)',
+          color: 'var(--color-navy)',
           margin: 0,
         }}
       >

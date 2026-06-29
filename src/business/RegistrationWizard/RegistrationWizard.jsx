@@ -14,7 +14,7 @@ function StepProgress({ step }) {
             style={{
               height: '6px',
               borderRadius: 'var(--radius-pill)',
-              background: index <= step ? 'var(--color-terracotta)' : 'var(--color-border)',
+              background: index <= step ? 'var(--color-gold)' : 'var(--color-border)',
               marginBottom: '0.4rem',
             }}
           />
@@ -22,7 +22,7 @@ function StepProgress({ step }) {
             style={{
               fontSize: 'var(--text-sm)',
               fontWeight: index === step ? 700 : 500,
-              color: index === step ? 'var(--color-purple)' : 'var(--color-text-muted)',
+              color: index === step ? 'var(--color-navy)' : 'var(--color-text-muted)',
             }}
           >
             {label}

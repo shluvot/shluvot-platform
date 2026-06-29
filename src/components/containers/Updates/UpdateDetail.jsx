@@ -21,7 +21,7 @@ export default function UpdateDetail() {
 
   return (
     <div className="page" style={{ maxWidth: '40rem', paddingBlock: 'var(--space-4) var(--space-6)' }}>
-      <Link to="/updates" style={{ color: 'var(--color-terracotta)', fontWeight: 700, textDecoration: 'none' }}>
+      <Link to="/updates" style={{ color: 'var(--color-gold)', fontWeight: 700, textDecoration: 'none' }}>
         → כל העדכונים
       </Link>
       <PageHeader title={article.title} />
@@ -29,7 +29,7 @@ export default function UpdateDetail() {
         <img
           src={article.cover_image_url}
           alt=""
-          style={{ width: '100%', borderRadius: '16px', marginBottom: 'var(--space-4)', boxShadow: '0 10px 30px rgba(46,31,71,.1)' }}
+          style={{ width: '100%', borderRadius: '16px', marginBottom: 'var(--space-4)', boxShadow: '0 10px 30px rgba(27,47,82,.1)' }}
         />
       )}
       {article.body.split('\n').map((paragraph, index) => (

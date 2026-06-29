@@ -1,11 +1,17 @@
 import MonoLabel from '../../dummies/MonoLabel/MonoLabel';
-import AboutIllustration from './illustration';
+// קובץ illustration.jsx נשמר על הדיסק (לא נמחק) למקרה שנרצה לחזור לאיור אחרי שהוחלף
+// כאן בתמונה אמיתית - אבל לא מיובא יותר, כדי לא להישאר עם import לא בשימוש.
 
 export default function AboutSection({ label, heading, body }) {
   const paragraphs = (body ?? '').split('\n').filter(Boolean);
 
   return (
-    <section id="about" style={{ background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    // position:sticky+top:0 - אותה תבנית כמו כל הסקשנים בעמוד הנחיתה: נדבק לראש המסך,
+    // נשאר תקוע עד שגובהו נגלל, ואז משתחרר בדיוק כשהסקשן הבא (שכבר ממתין מתחתיו, עם
+    // z-index גבוה יותר) מתחיל לעלות ולכסות אותו. z-index גבוה מהירו (0) חובה - אלמנט
+    // עם position אבל בלי z-index מפורש עדיין "מנצח" אלמנטים סטטיים בציור, בלי קשר לסדר
+    // ב-DOM, אז כל הסקשנים חייבים להשתתף בסדר העקבי הזה כדי שהירו לא "יחזור להיחשף".
+    <section id="about" style={{ position: 'sticky', top: 0, zIndex: 1, background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px' }}>
       <div
         style={{
           maxWidth: '1100px',
@@ -17,8 +23,8 @@ export default function AboutSection({ label, heading, body }) {
         }}
       >
         <div>
-          <MonoLabel color="var(--color-terracotta)">{label}</MonoLabel>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(34px,5vw,52px)', lineHeight: 1.08, margin: '0 0 22px', color: 'var(--color-purple)', letterSpacing: '-1px', whiteSpace: 'pre-line' }}>
+          <MonoLabel color="var(--color-gold)">{label}</MonoLabel>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(34px,5vw,52px)', lineHeight: 1.08, margin: '0 0 22px', color: 'var(--color-navy)', letterSpacing: '-1px', whiteSpace: 'pre-line' }}>
             {heading}
           </h2>
           {paragraphs.map((paragraph, i) => (
@@ -50,11 +56,15 @@ export default function AboutSection({ label, heading, body }) {
               height: 'clamp(280px,40vw,420px)',
               borderRadius: '18px',
               overflow: 'hidden',
-              background: 'var(--color-tan)',
-              boxShadow: '0 24px 50px rgba(36,26,46,.25)',
+              background: 'var(--color-section-cool)',
+              boxShadow: '0 24px 50px rgba(27,35,48,.25)',
             }}
           >
-            <AboutIllustration />
+            <img
+              src="/shluvotsection.png"
+              alt="שלובות - איגוד מטפלות המשפחתונים"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
           </div>
         </div>
       </div>

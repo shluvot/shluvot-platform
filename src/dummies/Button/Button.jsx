@@ -1,14 +1,14 @@
 const VARIANT_STYLES = {
   primary: {
-    background: 'var(--color-terracotta)',
+    background: 'var(--color-gold)',
     color: '#fff',
     border: 'none',
-    boxShadow: '0 10px 24px rgba(255,140,105,.35)',
+    boxShadow: '0 10px 24px rgba(201,162,39,.35)',
   },
   secondary: {
     background: 'transparent',
-    color: 'var(--color-purple)',
-    border: '1.5px solid rgba(46,31,71,.3)',
+    color: 'var(--color-navy)',
+    border: '1.5px solid rgba(27,47,82,.3)',
     boxShadow: 'none',
   },
   danger: {

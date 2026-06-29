@@ -2,7 +2,7 @@ export default function Textarea({ label, name, value, onChange, rows = 5, requi
   return (
     <label style={{ display: 'block', marginBottom: 'var(--space-3)' }}>
       {label && (
-        <span style={{ display: 'block', marginBottom: '0.4rem', fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--color-purple)' }}>
+        <span style={{ display: 'block', marginBottom: '0.4rem', fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>
           {label}
           {required ? ' *' : ''}
         </span>

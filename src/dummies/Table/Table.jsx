@@ -1,6 +1,6 @@
 export default function Table({ columns, rows, renderCell, getRowKey }) {
   return (
-    <div style={{ background: 'var(--color-surface)', borderRadius: '16px', boxShadow: '0 10px 30px rgba(46,31,71,.08)', overflow: 'auto' }}>
+    <div style={{ background: 'var(--color-surface)', borderRadius: '16px', boxShadow: '0 10px 30px rgba(27,47,82,.08)', overflow: 'auto' }}>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr>
@@ -11,10 +11,10 @@ export default function Table({ columns, rows, renderCell, getRowKey }) {
                   textAlign: 'start',
                   padding: '0.9rem 1rem',
                   borderBottom: '1.5px solid var(--color-border)',
-                  background: 'var(--color-section-warm)',
+                  background: 'var(--color-section-cool)',
                   fontSize: 'var(--text-sm)',
                   fontWeight: 700,
-                  color: 'var(--color-purple)',
+                  color: 'var(--color-navy)',
                   whiteSpace: 'nowrap',
                 }}
               >
