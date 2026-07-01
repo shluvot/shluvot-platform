@@ -9,11 +9,7 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    // position:relative+z-index (לא sticky - אין סקשן אחריו שצריך "להשתחרר" בשבילו) -
-    // עדיין נדרש כי ContactSection (לפניו בדף הנחיתה) הוא position:sticky עם z-index
-    // מפורש; בלי position+z-index גם כאן, ה-footer (סטטי) יצויר *מתחתיו* בלי קשר לסדר
-    // ה-DOM, ויכוסה במקום לבוא אחריו.
-    <footer style={{ position: 'relative', zIndex: 6, background: 'var(--color-footer-purple)', color: 'var(--color-cream-text)', padding: '48px 28px 32px' }}>
+    <footer style={{ background: 'var(--color-footer-purple)', color: 'var(--color-cream-text)', padding: '48px 28px 32px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '26px', letterSpacing: '-.5px' }}>שלובות</div>

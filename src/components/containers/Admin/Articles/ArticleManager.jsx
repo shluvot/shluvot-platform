@@ -9,7 +9,7 @@ import ArticleEditorForm from '../../../../business/ArticleEditorForm/ArticleEdi
 import { slugify, validateArticle } from '../../../../business/ArticleEditorForm/actions/validation';
 import { loadArticles, saveArticle, removeArticle, uploadCoverImage } from './actions/articleManagerActions';
 
-const BLANK_ARTICLE = { title: '', excerpt: '', body: '', cover_image_url: null, published: false };
+const BLANK_ARTICLE = { title: '', excerpt: '', body: '', cover_image_url: null, published: false, is_featured: false };
 
 export default function ArticleManager() {
   const dispatch = useDispatch();
@@ -51,6 +51,7 @@ export default function ArticleManager() {
         body: draft.body,
         cover_image_url: draft.cover_image_url,
         published: draft.published,
+        is_featured: draft.is_featured ?? false,
         ...(justPublished ? { published_at: new Date().toISOString() } : {}),
         ...(editingId ? {} : { slug: slugify(draft.title) }),
       };

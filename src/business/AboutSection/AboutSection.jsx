@@ -6,12 +6,7 @@ export default function AboutSection({ label, heading, body }) {
   const paragraphs = (body ?? '').split('\n').filter(Boolean);
 
   return (
-    // position:sticky+top:0 - אותה תבנית כמו כל הסקשנים בעמוד הנחיתה: נדבק לראש המסך,
-    // נשאר תקוע עד שגובהו נגלל, ואז משתחרר בדיוק כשהסקשן הבא (שכבר ממתין מתחתיו, עם
-    // z-index גבוה יותר) מתחיל לעלות ולכסות אותו. z-index גבוה מהירו (0) חובה - אלמנט
-    // עם position אבל בלי z-index מפורש עדיין "מנצח" אלמנטים סטטיים בציור, בלי קשר לסדר
-    // ב-DOM, אז כל הסקשנים חייבים להשתתף בסדר העקבי הזה כדי שהירו לא "יחזור להיחשף".
-    <section id="about" style={{ position: 'sticky', top: 0, zIndex: 1, background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    <section id="about" style={{ background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px' }}>
       <div
         style={{
           maxWidth: '1100px',

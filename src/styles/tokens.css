@@ -1,21 +1,21 @@
 :root {
-  --color-bg: #eef3fa;
+  --color-bg: #f0eef8;
   --color-surface: #ffffff;
-  --color-text: #1b2330;
-  --color-text-muted: #5b6472;
-  --color-border: #d3e0ee;
+  --color-text: #1e1830;
+  --color-text-muted: #5e5872;
+  --color-border: #d8d3ee;
 
-  /* כחול כהה - הצבע המוביל. מעביר חוסן, סמכות ויציבות - הזהות החדשה של האיגוד */
-  --color-navy-deep: #0f1b33;
-  --color-navy: #1b2f52;
-  --color-navy-light: #2e4a78;
+  /* סגול כהה - הצבע המוביל. אותו גוון חושך/עומק כמו הכחול הקודם, רק עם גוון סגול */
+  --color-navy-deep: #1a0d30;
+  --color-navy: #2d1b52;
+  --color-navy-light: #4a2e78;
 
   /* זהב - הצבע הנוסף היחיד בפלטה, לאקצנטים/קריאות-לפעולה בלבד */
   --color-gold: #c9a227;
   --color-gold-soft: #e8c766;
 
   /* רקע סקשן בהיר (גוון כחול בהיר יותר, לא ניטרלי) וטקסט-על-כחול */
-  --color-section-cool: #e1eaf5;
+  --color-section-cool: #e8e4f5;
   --color-cream-text: #f5f2ea;
 
   --color-footer-purple: var(--color-navy-deep);

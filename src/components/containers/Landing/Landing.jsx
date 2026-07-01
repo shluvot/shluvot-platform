@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import HeroSection from '../../../business/HeroSection/HeroSection';
-import AboutSection from '../../../business/AboutSection/AboutSection';
 import StatsStrip from '../../../business/StatsStrip/StatsStrip';
 import BenefitsGrid from '../../../business/BenefitsGrid/BenefitsGrid';
 import UpdatesPreviewSection from '../../../business/UpdatesPreviewSection/UpdatesPreviewSection';
@@ -17,12 +16,14 @@ export default function Landing() {
   useEffect(() => {
     sdk.articles
       .getPublishedArticles()
-      .then((articles) => setLatestArticles(articles.slice(0, 3)))
+      .then((articles) => {
+        // כתבה מובילה תמיד ראשונה
+        const sorted = [...articles].sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
+        setLatestArticles(sorted.slice(0, 9));
+      })
       .catch(() => setLatestArticles([]));
   }, []);
 
-  const hero = blocks.hero ?? {};
-  const about = blocks.about_page ?? {};
   const stats = blocks.stats?.items ?? [];
   const benefits = blocks.value_props ?? {};
   const updatesPreview = blocks.updates_preview ?? {};
@@ -42,21 +43,11 @@ export default function Landing() {
 
   return (
     <div>
-      <HeroSection
-        eyebrow={hero.eyebrow}
-        title={hero.title}
-        subtitle={hero.subtitle}
-        ctaLabel={hero.ctaLabel}
-        secondaryCtaLabel={hero.secondaryCtaLabel}
-        badges={hero.badges}
-      />
+      <HeroSection />
 
-      <AboutSection label={about.label} heading={about.heading} body={about.body} />
+      {/* סדר: הירו(בהיר) → מספרים(כהה) → עדכונים(בהיר) → יתרונות(כהה) → יצירת קשר(בהיר) */}
+      <StatsStrip items={stats} animated />
 
-      {/* הבלוג/עדכונים הוזז לבוא ישר אחרי "אודות" (לפי בקשה מפורשת). הוחלף גם סדר
-          Benefits/Stats (לעומת קודם) כדי לשמר רקעים-לסירוגין בלי שני סקשנים כהים ברצף -
-          Updates כהה (navy) ו-Stats גם כהה (navy-deep, עם טקסט בהיר קשיח שלא ניתן לשנות
-          לרקע בהיר), אז אם Stats היה בא ישר אחרי Updates היו שני סקשנים כהים צמודים. */}
       <UpdatesPreviewSection
         label={updatesPreview.label}
         heading={updatesPreview.heading}
@@ -65,8 +56,6 @@ export default function Landing() {
       />
 
       <BenefitsGrid label={benefits.label} heading={benefits.heading} items={benefits.items} />
-
-      <StatsStrip items={stats} />
 
       <ContactSection
         label={contact.label}

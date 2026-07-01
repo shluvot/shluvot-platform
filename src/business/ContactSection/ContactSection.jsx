@@ -36,9 +36,7 @@ export default function ContactSection({ label, heading, body, phone, email, onS
   };
 
   return (
-    // position:sticky+z-index - חלק מסדרת ה"ערימה" העקבית של כל סקשני דף הנחיתה (ראו
-    // הסבר ב-HeroSection.jsx).
-    <section id="contact" style={{ position: 'sticky', top: 0, zIndex: 5, background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    <section id="contact" style={{ background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px' }}>
       <div
         style={{
           maxWidth: '1040px',

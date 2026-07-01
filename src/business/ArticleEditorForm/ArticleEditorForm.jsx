@@ -39,7 +39,7 @@ export default function ArticleEditorForm({
         required
       />
       <ImageUploader currentUrl={values.cover_image_url} onUpload={onUploadCoverImage} isUploading={isUploadingImage} />
-      <label style={{ display: 'block', marginBottom: 'var(--space-2)' }}>
+      <label style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
         <input
           type="checkbox"
           checked={values.published}
@@ -47,6 +47,15 @@ export default function ArticleEditorForm({
           style={{ marginInlineEnd: '0.4rem' }}
         />
         מפורסם (גלוי לציבור)
+      </label>
+      <label style={{ display: 'block', marginBottom: 'var(--space-2)' }}>
+        <input
+          type="checkbox"
+          checked={values.is_featured ?? false}
+          onChange={(e) => onFieldChange('is_featured', e.target.checked)}
+          style={{ marginInlineEnd: '0.4rem', accentColor: 'var(--color-gold)' }}
+        />
+        ⭐ כתבה מובילה (תוצג גדולה ובולטת בראש בלוג האיגוד)
       </label>
       <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
         <Button onClick={onSave} disabled={isSaving}>
