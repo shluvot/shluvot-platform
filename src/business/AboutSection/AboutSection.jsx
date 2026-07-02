@@ -6,7 +6,7 @@ export default function AboutSection({ label, heading, body }) {
   const paragraphs = (body ?? '').split('\n').filter(Boolean);
 
   return (
-    <section id="about" style={{ background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px' }}>
+    <section id="about" style={{ background: 'var(--color-bg)', padding: 'clamp(64px,9vw,110px) 28px', overflowX: 'hidden' }}>
       <div
         style={{
           maxWidth: '1100px',
@@ -29,9 +29,10 @@ export default function AboutSection({ label, heading, body }) {
           ))}
         </div>
 
-        <div style={{ position: 'relative', justifySelf: 'center' }}>
+        <div className="about-image-wrap" style={{ position: 'relative', justifySelf: 'center' }}>
           <div
             aria-hidden="true"
+            className="about-image-shadow"
             style={{
               position: 'absolute',
               top: '22px',

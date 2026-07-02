@@ -75,10 +75,10 @@ export default function ContactSection({ label, heading, body, phone, email, onS
         </div>
 
         <div style={{ position: 'relative' }}>
-          <div aria-hidden="true" style={{ position: 'absolute', top: '18px', left: '-18px', width: '100%', height: '100%', background: 'var(--color-navy)', borderRadius: '18px', zIndex: 0 }} />
+          {/* צל רב-שכבתי במקום הבר הכהה האנכי הישן שנראה 2021 */}
 
           {sent ? (
-            <div style={{ position: 'relative', zIndex: 1, background: 'var(--color-surface)', borderRadius: '18px', padding: 'clamp(40px,5vw,56px)', boxShadow: '0 20px 50px rgba(27,35,48,.14)', textAlign: 'center' }}>
+            <div style={{ position: 'relative', zIndex: 1, background: 'var(--color-surface)', borderRadius: '18px', padding: 'clamp(40px,5vw,56px)', boxShadow: '0 4px 6px rgba(45,27,82,.04), 0 16px 40px rgba(45,27,82,.12), 0 36px 64px rgba(45,27,82,.08)', textAlign: 'center' }}>
               <div style={{ width: '64px', height: '64px', background: 'var(--color-gold)', borderRadius: '50%', margin: '0 auto 22px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px', color: 'var(--color-navy)' }}>
                 ✓
               </div>
@@ -90,7 +90,7 @@ export default function ContactSection({ label, heading, body, phone, email, onS
           ) : (
             <form
               onSubmit={handleSubmit}
-              style={{ position: 'relative', zIndex: 1, background: 'var(--color-surface)', borderRadius: '18px', padding: 'clamp(26px,4vw,38px)', boxShadow: '0 20px 50px rgba(27,35,48,.14)', display: 'flex', flexDirection: 'column', gap: '18px' }}
+              style={{ position: 'relative', zIndex: 1, background: 'var(--color-surface)', borderRadius: '18px', padding: 'clamp(26px,4vw,38px)', boxShadow: '0 4px 6px rgba(45,27,82,.04), 0 16px 40px rgba(45,27,82,.12), 0 36px 64px rgba(45,27,82,.08)', display: 'flex', flexDirection: 'column', gap: '18px' }}
             >
               <div>
                 <label style={labelStyle}>שם מלא</label>

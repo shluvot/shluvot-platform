@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import Footer from '../../dummies/Footer/Footer';
 
@@ -18,20 +18,32 @@ const NAV_BTN = {
 
 export default function AppLayout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [atTop, setAtTop] = useState(true);
   const { pathname } = useLocation();
   const isLanding = pathname === '/';
+
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // בדף הנחיתה: שקוף לחלוטין כשבראש הדף, מופיע בגלילה
+  const transparent = isLanding && atTop;
 
   return (
     <div>
       <header style={{
-        position: 'sticky', top: 0, zIndex: 100,
-        background: isLanding ? 'rgba(240,238,248,.95)' : 'var(--color-surface)',
-        backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: `1px solid ${isLanding ? 'rgba(211,200,238,.5)' : 'var(--color-border)'}`,
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        background: transparent ? 'transparent' : isLanding ? 'rgba(240,238,248,.95)' : 'var(--color-surface)',
+        backdropFilter: transparent ? 'none' : 'blur(12px)',
+        WebkitBackdropFilter: transparent ? 'none' : 'blur(12px)',
+        borderBottom: transparent ? 'none' : `1px solid ${isLanding ? 'rgba(211,200,238,.5)' : 'var(--color-border)'}`,
+        transition: 'background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease',
       }}>
         <div style={{ maxWidth: '1180px', margin: '0 auto', padding: '16px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '22px', letterSpacing: '-.5px', color: 'var(--color-navy)' }}>
+            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '22px', letterSpacing: '-.5px', color: transparent ? '#fff' : 'var(--color-navy)', transition: 'color 0.3s ease' }}>
               שלובות
             </span>
           </Link>
@@ -41,7 +53,7 @@ export default function AppLayout() {
               <Link
                 key={link.to}
                 to={link.to}
-                style={{ color: 'var(--color-navy)', textDecoration: 'none', fontWeight: 600, fontSize: '15px', opacity: 0.75, whiteSpace: 'nowrap' }}
+                style={{ color: transparent ? 'rgba(255,255,255,.85)' : 'var(--color-navy)', textDecoration: 'none', fontWeight: 600, fontSize: '15px', opacity: transparent ? 1 : 0.75, whiteSpace: 'nowrap', transition: 'color 0.3s ease' }}
               >
                 {link.label}
               </Link>

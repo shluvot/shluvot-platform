@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import HeroSection from '../../../business/HeroSection/HeroSection';
+import AboutSection from '../../../business/AboutSection/AboutSection';
 import StatsStrip from '../../../business/StatsStrip/StatsStrip';
 import BenefitsGrid from '../../../business/BenefitsGrid/BenefitsGrid';
 import UpdatesPreviewSection from '../../../business/UpdatesPreviewSection/UpdatesPreviewSection';
@@ -24,6 +25,7 @@ export default function Landing() {
       .catch(() => setLatestArticles([]));
   }, []);
 
+  const about = blocks.about_page ?? {};
   const stats = blocks.stats?.items ?? [];
   const benefits = blocks.value_props ?? {};
   const updatesPreview = blocks.updates_preview ?? {};
@@ -45,7 +47,9 @@ export default function Landing() {
     <div>
       <HeroSection />
 
-      {/* סדר: הירו(בהיר) → מספרים(כהה) → עדכונים(בהיר) → יתרונות(כהה) → יצירת קשר(בהיר) */}
+      <AboutSection label={about.label} heading={about.heading} body={about.body} />
+
+      {/* סדר: מי אנחנו(בהיר) → מספרים(כהה) → עדכונים(בהיר) → יתרונות(כהה) → יצירת קשר(בהיר) */}
       <StatsStrip items={stats} animated />
 
       <UpdatesPreviewSection

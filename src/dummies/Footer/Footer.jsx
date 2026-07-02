@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 
 const LINKS = [
-  { to: '/#about', label: 'אודות' },
-  { to: '/#benefits', label: 'יתרונות' },
-  { to: '/updates', label: 'עדכונים' },
+  { to: '/',         label: 'בית' },
+  { to: '/updates',  label: 'עדכונים' },
   { to: '/#contact', label: 'צרו קשר' },
 ];
 

@@ -9,6 +9,7 @@ body {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  overflow-x: hidden; /* מונע גלילה אופקית בכל מקרה */
 }
 
 body {
@@ -319,4 +320,54 @@ textarea:focus {
   transform: translateY(-3px) scale(1.04);
   box-shadow: 0 16px 38px rgba(201,162,39,.65) !important;
   background-color: var(--color-gold-soft) !important;
+}
+
+/* ═══════════════════════════════════════════════
+   מובייל רספונסיבי מלא
+═══════════════════════════════════════════════ */
+
+/* --- ≤768px: ניווט מובייל --- */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  /* כפתור הצף — מוסתר, כפתור הנב מספיק */
+  .hero-join-btn {
+    display: none !important;
+  }
+
+  /* Hero — גובה לפי פרופורציית הוידאו (16:9) במובייל, לא 100vh שחותך */
+  .hero-fullscreen {
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+  }
+
+  /* טבעות דקורטיביות בHero — מוסתרות, חוסכות מקום ומונעות overflow */
+  .hero-deco-rings {
+    display: none;
+  }
+
+  /* עיגולי שירות בHero — מוסתרים במובייל (16:9 Hero קטן מדי לארבעה עיגולים) */
+  .hero-service-row {
+    display: none !important;
+  }
+
+  /* תמונת About — מונע shadow-offset מחוץ למסך */
+  .about-image-shadow {
+    right: -10px !important;
+    top: 10px !important;
+  }
+
+  .about-image-wrap {
+    overflow: hidden;
+    max-width: calc(100vw - 56px) !important;
+    width: calc(100vw - 56px) !important;
+  }
+
+  /* פדינג כללי — צמצום בצדדים */
+  .page {
+    padding-inline: var(--space-2);
+  }
 }

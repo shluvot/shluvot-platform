@@ -91,8 +91,9 @@ export default function UpdatesPreviewSection({ label, heading, ctaLabel, articl
 
         {!articles?.length ? <EmptyState message="עדכונים חדשים יתפרסמו כאן בקרוב" /> : (
           <>
-            {/* שורה עליונה: כתבת שער + 2 כתבות בינוניות */}
-            <div style={{ display: 'grid', gridTemplateColumns: secondary.length ? '1.6fr 1fr' : '1fr', gap: '32px', marginBottom: '8px' }}>
+            {/* שורה עליונה: כתבת שער + 2 כתבות בינוניות.
+                repeat(auto-fit, minmax(min(280px,100%), 1fr)) — עמודה אחת במובייל, שתיים בדסקטופ */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: '24px', marginBottom: '8px', alignItems: 'start' }}>
               {featured && <FeaturedStory article={featured} />}
               {secondary.length > 0 && (
                 <div>
@@ -101,9 +102,9 @@ export default function UpdatesPreviewSection({ label, heading, ctaLabel, articl
               )}
             </div>
 
-            {/* שורה תחתונה: כתבות נוספות — עם תמונות, רשת 3 עמודות */}
+            {/* שורה תחתונה: כתבות נוספות */}
             {list.length > 0 && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '0 32px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(240px, 100%), 1fr))', gap: '0 24px' }}>
                 {list.map((a) => <NewsItem key={a.id} article={a} showImage />)}
               </div>
             )}
